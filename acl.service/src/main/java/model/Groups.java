@@ -5,28 +5,32 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import org.json.JSONArray;
+
 
 @Entity
-public class Group {
+public class Groups {
+
+	@Id
 	private String gId;
 	private String gName;
 	private String gDescription;
-	private List<User> gUsers;
-	private JSONArray gArbitraryAttributes;
-	private JSONArray gResource;
+//	private List<User> gUsers;
+	private String gArbitraryAttributes;
+	private String gResource;
 	
-	public Group(String gId, String gName, String gDescription, List<User> gUsers, JSONArray gArbitraryAttributes,
-			JSONArray gResource) {
+	public Groups(String gId, String gName, String gDescription, List<User> gUsers, String gArbitraryAttributes,
+			String gResource) {
 		this.gId = gId;
 		this.gName = gName;
 		this.gDescription = gDescription;
-		this.gUsers = gUsers;
+//		this.gUsers = gUsers;
 		this.gArbitraryAttributes = gArbitraryAttributes;
 		this.gResource = gResource;
 	}
 
-	@Id
+	public Groups() {
+	}
+
 	public String getgId() {
 		return gId;
 	}
@@ -34,22 +38,22 @@ public class Group {
 		this.gId = gId;
 	}
 
-	public List<User> getgUsers() {
-		return gUsers;
-	}
-	public void setgUsers(List<User> gUsers) {
-		this.gUsers = gUsers;
-	}
-	public JSONArray getgArbitraryAttributes() {
+//	public List<User> getgUsers() {
+//		return gUsers;
+//	}
+//	public void setgUsers(List<User> gUsers) {
+//		this.gUsers = gUsers;
+//	}
+	public String getgArbitraryAttributes() {
 		return gArbitraryAttributes;
 	}
-	public void setgArbitraryAttributes(JSONArray gArbitraryAttributes) {
+	public void setgArbitraryAttributes(String gArbitraryAttributes) {
 		this.gArbitraryAttributes = gArbitraryAttributes;
 	}
-	public JSONArray getgResource() {
+	public String getgResource() {
 		return gResource;
 	}
-	public void setgResource(JSONArray gResource) {
+	public void setgResource(String gResource) {
 		this.gResource = gResource;
 	}	
 	public String getgName() {

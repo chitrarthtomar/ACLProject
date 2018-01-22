@@ -2,19 +2,23 @@ package model;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Resource {
+	@Id
 	private int rId;
 	private String rName;
-	private List<String> rPermissions;
+	private String rPermissions;
 	
-	public Resource(int rId, String rName, List<String> rPermissions) {
+	public Resource(int rId, String rName, String rPermissions) {
 		this.rId = rId;
 		this.rName = rName;
 		this.rPermissions = rPermissions;
 	}
 	
 	public Resource() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public int getrId() {
@@ -29,10 +33,10 @@ public class Resource {
 	public void setrName(String rName) {
 		this.rName = rName;
 	}
-	public List<String> getrPermissions() {
+	public String getrPermissions() {
 		return rPermissions;
 	}
-	public void setrPermissions(List<String> rPermissions) {
+	public void setrPermissions(String rPermissions) {
 		this.rPermissions = rPermissions;
 	} 
 }

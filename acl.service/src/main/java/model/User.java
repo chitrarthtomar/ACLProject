@@ -9,23 +9,29 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.JoinColumn;
 
-import org.json.JSONArray;
+
 
 @Entity
 public class User {
+	@Id
 	private String uId;
 	private String uName;
 	private String uPassword;
-	private List<Group> uGroups;
-	private JSONArray uMandatoryAttributes;
-	private JSONArray uArbitraryAttributes;
-	private JSONArray uResource;
+	/**
+	 * 
+	 */
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(name="USER_GROUP",joinColumns= {@JoinColumn(name="USER_ID")},inverseJoinColumns= {@JoinColumn(name="GROUP_ID")})
+	private List<Groups> uGroups;
+	private String uMandatoryAttributes;
+	private String uArbitraryAttributes;
+	private String uResource;
 	
 	public User(){
 	}
 	
-	public User(String uId, String uName, String uPassword, List<Group> uGroups, JSONArray uMandatoryAttributes,
-			JSONArray uArbitraryAttributes, JSONArray uResource) {
+	public User(String uId, String uName, String uPassword, List<Groups> uGroups, String uMandatoryAttributes,
+			String uArbitraryAttributes, String uResource) {
 		super();
 		this.uId = uId;
 		this.uName = uName;
@@ -36,7 +42,7 @@ public class User {
 		this.uResource = uResource;
 	}
 
-	@Id
+	
 	public String getuId() {
 		return uId;
 	}
@@ -44,28 +50,27 @@ public class User {
 		this.uId = uId;
 	}
 	
-	@ManyToMany(cascade=CascadeType.ALL)
-	@JoinTable(name="USER_GROUP",joinColumns= {@JoinColumn(name="USER_ID")},inverseJoinColumns= {@JoinColumn(name="GROUP_ID")})
-	public List<Group> getuGroups() {
+	
+	public List<Groups> getuGroups() {
 		return uGroups;
 	}
-	public void setuGroups(List<Group> uGroups) {
+	public void setuGroups(List<Groups> uGroups) {
 		this.uGroups = uGroups;
 	}
 	
-	public JSONArray getuMandatoryAttributes() {
+	public String getuMandatoryAttributes() {
 		return uMandatoryAttributes;
 	}
-	public void setuMandatoryAttributes(JSONArray uMandatoryAttributes) {
+	public void setuMandatoryAttributes(String uMandatoryAttributes) {
 		this.uMandatoryAttributes = uMandatoryAttributes;
 	}
-	public JSONArray getuArbitraryAttributes() {
+	public String getuArbitraryAttributes() {
 		return uArbitraryAttributes;
 	}
-	public void setuArbitraryAttributes(JSONArray uArbitraryAttributes) {
+	public void setuArbitraryAttributes(String uArbitraryAttributes) {
 		this.uArbitraryAttributes = uArbitraryAttributes;
 	}
-	public void setuResource(JSONArray uResource) {
+	public void setuResource(String uResource) {
 		this.uResource = uResource;
 	}
 	public String getuName() {
