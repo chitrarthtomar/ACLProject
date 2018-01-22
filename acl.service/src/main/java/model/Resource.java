@@ -13,6 +13,10 @@ public class Resource {
 		this.rPermissions = rPermissions;
 	}
 	
+	public Resource() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getrId() {
 		return rId;
 	}
