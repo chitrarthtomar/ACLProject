@@ -6,11 +6,13 @@ public class Resource {
 	private int rId;
 	private String rName;
 	private List<String> rPermissions;
+	
 	public Resource(int rId, String rName, List<String> rPermissions) {
 		this.rId = rId;
 		this.rName = rName;
 		this.rPermissions = rPermissions;
 	}
+	
 	public int getrId() {
 		return rId;
 	}
