@@ -1,0 +1,9 @@
+<div ng-controller="profileCtrl" ng-if="currentUser">Welcome, {{ currentUser.name }}
+
+  <div ng-switch on="currentUser.role">
+    <div ng-switch-when="superAdmin">You're superAdmin.</div>
+    <div ng-switch-when="admin">You're admin</div>
+    <div ng-switch-when="user">You are a user</div>
+    <div ng-switch-default>You're something else.</div>
+  </div>
+</div>
