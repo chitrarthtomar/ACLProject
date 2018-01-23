@@ -13,14 +13,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 import model.User;
 import services.UserDao;
+import services.UserService;
 
 @Controller  
 public class MvcController {  
 
-
+	@Autowired
+	UserService userService;
+	
     @RequestMapping("/login")  
     public ModelAndView viewuser(){  
         System.out.println("working");
+        userService.updateUser("EMP01", "Chitrarth");
         return new ModelAndView("redirect:/");
     }
  

@@ -7,10 +7,10 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 import model.User;
 
 public interface UserService {
-	public void setTemplate(HibernateTemplate template);
+
 	public void saveUser(User e);  
 	//method to update employee  
-	public void updateUser(User e);  
+	public void updateUser(String uId, String name);  
 	//method to delete employee  
 	public void deleteUser(User e);  
 	//method to return one employee of given id  
