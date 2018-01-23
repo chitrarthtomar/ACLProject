@@ -24,7 +24,7 @@ public class MvcController {
     @RequestMapping("/login")  
     public ModelAndView viewuser(){  
         System.out.println("working");
-        userService.updateUser("EMP01", "Chitrarth");
+        userService.updateUser("EMP01", "Viggy GG");
         return new ModelAndView("redirect:/");
     }
  
