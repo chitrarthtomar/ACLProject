@@ -16,48 +16,12 @@ import services.UserDao;
 
 @Controller  
 public class MvcController {  
-    @Autowired  
-    UserDao dao;  
 
-//    @RequestMapping("/")  
-//    public ModelAndView initPage(){  
-//        return new ModelAndView("webUI");  
-//    }
-//
-//    @RequestMapping("/empForm")  
-//    public ModelAndView showform(){  
-//        return new ModelAndView("empForm","command",new Employee());  
-//    }  
-//
-//    @RequestMapping(value="/save",method = RequestMethod.POST)  
-//    public ModelAndView save(@ModelAttribute("emp") Employee emp){  
-//        dao.addEmployee(emp);  
-//        return new ModelAndView("redirect:/viewemp");
-//    }  
-// 
-    @RequestMapping("/viewuser")  
-    public void viewuser(){  
-        List<User> list=dao.getAllUsers();  
+
+    @RequestMapping("/login")  
+    public ModelAndView viewuser(){  
         System.out.println("working");
-        return;
+        return new ModelAndView("redirect:/");
     }
-//    @RequestMapping("/view5emp")  
-//    public ModelAndView view5emp(){  
-//        ArrayList<Employee> list=new ArrayList<>();
-//        list.add(dao.get5thEmployeebyAge());
-//        System.out.println(list.get(0));
-//        return new ModelAndView("viewemp","list",list);  
-//    }
-//    
-//    @RequestMapping(value="/empeditform/{id}")
-//	public ModelAndView edit(@PathVariable int id){
-//		Employee emp=dao.getEmpById(id);
-//		return new ModelAndView("empeditform","command",emp);
-//	}
-//
-//    @RequestMapping(value="empeditform/editsave",method = RequestMethod.POST)  
-//    public ModelAndView editsave(@ModelAttribute("emp") Employee emp){  
-//        dao.updateEmployee(emp);  
-//        return new ModelAndView("redirect:/viewemp");  
-//    }  
+ 
 }

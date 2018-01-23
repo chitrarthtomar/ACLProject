@@ -1,7 +1,5 @@
 package model;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -14,16 +12,13 @@ public class Groups {
 	private String gId;
 	private String gName;
 	private String gDescription;
-//	private List<User> gUsers;
 	private String gArbitraryAttributes;
 	private String gResource;
 	
-	public Groups(String gId, String gName, String gDescription, List<User> gUsers, String gArbitraryAttributes,
-			String gResource) {
+	public Groups(String gId, String gName, String gDescription, String gArbitraryAttributes, String gResource) {
 		this.gId = gId;
 		this.gName = gName;
 		this.gDescription = gDescription;
-//		this.gUsers = gUsers;
 		this.gArbitraryAttributes = gArbitraryAttributes;
 		this.gResource = gResource;
 	}
@@ -38,12 +33,6 @@ public class Groups {
 		this.gId = gId;
 	}
 
-//	public List<User> getgUsers() {
-//		return gUsers;
-//	}
-//	public void setgUsers(List<User> gUsers) {
-//		this.gUsers = gUsers;
-//	}
 	public String getgArbitraryAttributes() {
 		return gArbitraryAttributes;
 	}

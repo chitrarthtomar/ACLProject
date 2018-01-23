@@ -4,6 +4,12 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee   
     http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">  
+ 
+ 	<context-param>
+	  	<param-name>applicationContext</param-name>
+	  	<param-value>/WEB-INF/applicationContext.xml</param-value>
+	 </context-param>
+ 
  <servlet>  
     <servlet-name>spring</servlet-name>  
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>  
@@ -13,4 +19,13 @@
     <servlet-name>spring</servlet-name>  
     <url-pattern>/</url-pattern>  
 </servlet-mapping>  
+
+    <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<listener>
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+	</listener>
+	
 </web-app> 

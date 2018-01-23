@@ -1,7 +1,5 @@
 package model;
 
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -22,7 +20,7 @@ public class User {
 	 */
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="USER_GROUP",joinColumns= {@JoinColumn(name="USER_ID")},inverseJoinColumns= {@JoinColumn(name="GROUP_ID")})
-	private List<Groups> uGroups;
+	private String uGroups;
 	private String uMandatoryAttributes;
 	private String uArbitraryAttributes;
 	private String uResource;
@@ -30,7 +28,7 @@ public class User {
 	public User(){
 	}
 	
-	public User(String uId, String uName, String uPassword, List<Groups> uGroups, String uMandatoryAttributes,
+	public User(String uId, String uName, String uPassword, String uGroups, String uMandatoryAttributes,
 			String uArbitraryAttributes, String uResource) {
 		super();
 		this.uId = uId;
@@ -51,10 +49,10 @@ public class User {
 	}
 	
 	
-	public List<Groups> getuGroups() {
+	public String getuGroups() {
 		return uGroups;
 	}
-	public void setuGroups(List<Groups> uGroups) {
+	public void setuGroups(String uGroups) {
 		this.uGroups = uGroups;
 	}
 	
@@ -86,7 +84,7 @@ public class User {
 	public void setuPassword(String uPassword) {
 		this.uPassword = uPassword;
 	}
-	public Object getuResource() {
+	public String getuResource() {
 		return uResource;
 	}
 

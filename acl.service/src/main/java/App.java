@@ -31,8 +31,7 @@ public class App {
 	g1.setgDescription("Access to maximum things");
 	g1.setgResource(res.toString());
 	g1.setgArbitraryAttributes(res.toString());
-	List<Groups> gList = new ArrayList<Groups>();
-	gList.add(g1);
+
 	
 	//mandatory attribute
 	JSONObject manAtt=new JSONObject();    
@@ -46,7 +45,7 @@ public class App {
 	u1.setuId("EMP01");
 	u1.setuName("Aditi Giri");
 	u1.setuPassword("Hello");
-	u1.setuGroups(gList);
+	u1.setuGroups(res.toString());
 	u1.setuResource(res.toString());
 	u1.setuMandatoryAttributes(manAtt.toString());
 	u1.setuArbitraryAttributes(arbAtt.toString());

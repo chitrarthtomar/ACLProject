@@ -1,11 +1,12 @@
 package services;
-import java.util.*;
+
+import java.util.List;
 
 import org.springframework.orm.hibernate4.HibernateTemplate;
-import model.User; 
 
-public interface UserDao {
-	
+import model.User;
+
+public interface UserService {
 	public void setTemplate(HibernateTemplate template);
 	public void saveUser(User e);  
 	//method to update employee  
