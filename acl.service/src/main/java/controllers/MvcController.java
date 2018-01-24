@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import model.User;
-import services.UserDao;
+import dao.UserDao;
 import services.UserService;
 
 @Controller  

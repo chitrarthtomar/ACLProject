@@ -1,4 +1,4 @@
-package services;
+package dao;
 import java.util.*;
 
 import org.springframework.orm.hibernate4.HibernateTemplate;

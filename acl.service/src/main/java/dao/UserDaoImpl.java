@@ -1,4 +1,4 @@
-package services;
+package dao;
 
 import java.util.List;
 
@@ -14,6 +14,7 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import dao.UserDao;
 import model.User;
 
 @Repository
