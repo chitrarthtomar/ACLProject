@@ -1,4 +1,3 @@
-
 angular.module('myApp').factory('AuthService', function ($http, Session) {
     var authService = {};
    
