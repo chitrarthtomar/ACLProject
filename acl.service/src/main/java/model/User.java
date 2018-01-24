@@ -1,61 +1,55 @@
 package model;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.JoinColumn;
 
 
-
 @Entity
 public class User {
 	@Id
-	private String uId;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int uId;
+//	@ManyToMany(mappedBy="gUsers")
+//	private List<Groups> uGroups;
 	private String uName;
 	private String uPassword;
-	/**
-	 * 
-	 */
-	@ManyToMany(cascade=CascadeType.ALL)
-	@JoinTable(name="USER_GROUP",joinColumns= {@JoinColumn(name="USER_ID")},inverseJoinColumns= {@JoinColumn(name="GROUP_ID")})
-	private String uGroups;
 	private String uMandatoryAttributes;
 	private String uArbitraryAttributes;
 	private String uResource;
-	
 	public User(){
 	}
 	
-	public User(String uId, String uName, String uPassword, String uGroups, String uMandatoryAttributes,
+	public User(String uName, String uPassword, String uMandatoryAttributes,
 			String uArbitraryAttributes, String uResource) {
 		super();
-		this.uId = uId;
 		this.uName = uName;
 		this.uPassword = uPassword;
-		this.uGroups = uGroups;
 		this.uMandatoryAttributes = uMandatoryAttributes;
 		this.uArbitraryAttributes = uArbitraryAttributes;
 		this.uResource = uResource;
 	}
 
-	
-	public String getuId() {
+//	public List<Groups> getuGroups() {
+//		return uGroups;
+//	}
+//
+//	public void setuGroups(List<Groups> uGroups) {
+//		this.uGroups = uGroups;
+//	}
+	public int getuId() {
 		return uId;
 	}
-	public void setuId(String uId) {
+	public void setuId(int uId) {
 		this.uId = uId;
 	}
-	
-	
-	public String getuGroups() {
-		return uGroups;
-	}
-	public void setuGroups(String uGroups) {
-		this.uGroups = uGroups;
-	}
-	
 	public String getuMandatoryAttributes() {
 		return uMandatoryAttributes;
 	}
@@ -87,5 +81,4 @@ public class User {
 	public String getuResource() {
 		return uResource;
 	}
-
 }

@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.orm.hibernate4.HibernateTemplate;
 
+import model.Groups;
 import model.User;
 
 public interface UserService {
-
-	public void saveUser(User e);  
+	
+	//method to create user
+	public void createUser(String uName, String uPassword, String uMandatoryAttributes, String uArbitraryAttributes, String uResource);  
 	//method to update employee  
 	public void updateUser(String uId, String name);  
 	//method to delete employee  
