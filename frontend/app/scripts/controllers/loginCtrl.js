@@ -8,7 +8,7 @@ angular.module('myApp').controller('LoginController', function ($scope,$state, $
         
         $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
         $scope.setCurrentUser(user);
-        $state.transitionTo('profile');
+        $state.transitionTo('adminWelcome');
       }, function () {
         $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
       });

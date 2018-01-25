@@ -14,6 +14,34 @@ angular.module('myApp').config(['$stateProvider','USER_ROLES', function( $stateP
             authorizedRoles : [USER_ROLES.all]
         }
       });
+      $stateProvider.state('adminHome',{
+        url : "/admin/home",
+        templateUrl : "./views/admin/HomePage.html",
+        data : {
+            authorizedRoles : [USER_ROLES.admin, USER_ROLES.superAdmin]
+        }
+      });
+      $stateProvider.state('adminWelcome',{
+        url : "/admin/welcome",
+        templateUrl : "./views/admin/Welcome.html",
+        data : {
+            authorizedRoles : [USER_ROLES.admin, USER_ROLES.superAdmin]
+        }
+      });
+      $stateProvider.state('adminGroupList',{
+        url : "/admin/groups",
+        templateUrl : "./views/admin/GroupList.html",
+        data : {
+            authorizedRoles : [USER_ROLES.admin, USER_ROLES.superAdmin]
+        }
+      });
+      $stateProvider.state('groupsInfo',{
+        url : "/admin/groups",
+        templateUrl : "./views/admin/GroupInfo.html",
+        data : {
+            authorizedRoles : [USER_ROLES.admin, USER_ROLES.superAdmin]
+        }
+      });
   }]);
   
   

@@ -27,7 +27,7 @@
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
-
+  <div ng-include="Groups.html"></div>
  <div ui-view></div>
 
   <!-- <div>Angular seed app: v<span app-version></span></div> --> 
@@ -42,8 +42,17 @@
   <script src="scripts/controllers/loginCtrl.js"></script>
   <script src="scripts/controllers/profileCtrl.js"></script>
   <script src="scripts/controllers/applicationCtrl.js"></script>
+  <script src="scripts/controllers/adminGroups.js"></script>
+  <script src="scripts/controllers/adminUsers.js"></script>
+  <script src="scripts/controllers/adminUserAdd.js"></script>
+  <script src="scripts/controllers/adminGroupsInfo.js"></script>
+  <script src="scripts/controllers/adminGroupInfoUsers.js"></script>
+  <script src="scripts/controllers/resourceAdd.js"></script>
+  <script src="scripts/controllers/resourceInfo.js"></script>
+  <script src="scripts/controllers/resource.js"></script>
   <script src="scripts/services/AuthService.js"></script>
   <script src="scripts/services/Session.js"></script>
+  <script src="scripts/services/SelectionService.js"></script>
   <script src="scripts/constants/AuthEvents.js"></script>
   <script src="scripts/constants/UserRoles.js"></script>
   <script src="scripts/configs/myApp.js"></script>
@@ -52,6 +61,9 @@
   <script src="components/version/version-directive.js"></script>
   <script src="components/version/interpolate-filter.js"></script>
   <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
   <div login-dialog ng-if="!isLoginPage"></div>
 </body>
 </html>

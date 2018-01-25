@@ -1,0 +1,43 @@
+
+		
+			<div ng-controller="groupInfoCtrl">
+				Name:
+				<label id="userName" ></label><br>
+				Description:
+				<label id="userName" ></label><br>
+	
+				Arbitrary Attributes:
+				<table border="1">
+					<tr ng-repeat="(key, value) in arbAttrList">
+					  <td>{{key}}</td>
+					  <td>{{value}}</td>  
+					</tr>
+				</table>
+				<br>
+				Permissions:
+				<br>
+				<table border="1">
+					<tr ng-repeat="(key, value) in permissions">
+					  <td>{{key}}</td>
+					  <td>{{value}}</td>  
+					</tr>
+				</table>
+				
+				<fieldset  data-ng-repeat="choice in choices">
+					  <select id="resourceDropdown" ng-model="choice.resource" ng-options="item for item in res_dd" >
+					  </select>
+					  <select id="permissionDropdown" ng-model="choice.permission" ng-options="item for item in perm_dd">
+					  </select>
+					  <button class="remove" ng-show="$last" ng-click="removeChoice()">-</button>
+				</fieldset>
+				<button class="addfields" ng-click="addNewChoice()">Add fields</button>
+					   
+				<div id="choicesDisplay">
+					{{ choices }}
+				</div>
+				
+				
+			</div>
+		
+
+
