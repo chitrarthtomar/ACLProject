@@ -11,7 +11,7 @@
             
           <property name="uName"></property>  
           <property name="uPassword"></property> 
-          <property name = "uGroups"></property>
+          <property name = "uRole"></property>
           <property name="uMandatoryAttributes"></property>
           <property name="uArbitraryAttributes"> </property>
           <property name="uResource"></property>

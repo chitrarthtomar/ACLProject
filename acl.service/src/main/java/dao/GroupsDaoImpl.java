@@ -2,26 +2,21 @@ package dao;
 
 import java.util.List;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import dao.UserDao;
 import model.Groups;
 import model.User;
 
-@Repository
 @Transactional
-public class UserDaoImpl implements UserDao{
-	
+@Repository
+public class GroupsDaoImpl implements GroupsDao{
 	
 	@Autowired
     private static SessionFactory sessionFactory;
@@ -33,52 +28,54 @@ public class UserDaoImpl implements UserDao{
 	    sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 	    return sessionFactory;
 	}
-	//method to create user
-	public int createUser(String uName, String uPassword, String uRole, String uMandatoryAttributes, String uArbitraryAttributes, String uResource){
+
+	@Override
+	public int createGroup(String gName, String gDescription, String gArbitraryAttributes, String gResource) {
 		SessionFactory sf = createSessionFactory();
 		Session sess = sf.openSession();
-		int uId=-1; // review this later
+		int gId=-1; // review this later
 		 try {
 			 sess.getTransaction().begin();
-			 User user = new User(uName,uPassword, uRole, uMandatoryAttributes, uArbitraryAttributes, uResource);
-			 uId= (Integer)sess.save(user);
+			 Groups group = new Groups(gName,gDescription,gArbitraryAttributes, gResource);
+			 gId= (Integer)sess.save(group);
 			 sess.getTransaction().commit();
 		 }
 		 catch (RuntimeException e) {
 			 sess.getTransaction().rollback();
 			 throw e;
 		 }
-		 return uId;
-	}  
-	
-	//method to update employee  
-	public void updateUser(int uId, String uName, String uPassword,  String uRole, String uMandatoryAttributes, String uArbitraryAttributes, String uResource){ 
-		 SessionFactory sf = createSessionFactory();
+		 return gId;
+	}
+
+	@Override
+	public void updateGroup(int gId, String gName, String gDescription, String gArbitraryAttributes, String gResource) {
+		SessionFactory sf = createSessionFactory();
 		 Session sess = sf.openSession();
 		 try {
 			 sess.getTransaction().begin(); 
-		     if(!this.deleteUser(uId)) {
+		     if(!this.deleteGroup(gId)) {
 		    	 return;
 		     }
-		     this.createUser(uName, uPassword, uRole, uMandatoryAttributes, uArbitraryAttributes, uResource);
+		     this.createGroup(gName,gDescription,gArbitraryAttributes, gResource);
 			 sess.getTransaction().commit();
 		 }
 		 catch (RuntimeException e) {
 			 sess.getTransaction().rollback();
 			 throw e;
 		 }
-	}  
-	//method to delete employee  
-	public boolean deleteUser(int uId){
+	}
+
+	@Override
+	public boolean deleteGroup(int gId) {
 		SessionFactory sf = createSessionFactory();
 		 Session sess = sf.openSession();
 		 try {
 			 sess.getTransaction().begin();
-			 User user = (User)sess.get(User.class, uId);
-			 if(user==null) {
+			 Groups group = (Groups)sess.get(Groups.class, gId);
+			 if(group==null) {
 				 return false; // if user is not present do nothing
 			 }
-		     sess.delete(user);
+		     sess.delete(group);
 			 sess.getTransaction().commit();
 		 }
 		 catch (RuntimeException e) {
@@ -86,17 +83,34 @@ public class UserDaoImpl implements UserDao{
 			 throw e;
 		 }
 		 return true;
-	}  
+	}
 
-	//method to return all employees  
-	@SuppressWarnings("unchecked")
-	public List<User> getAllUsers(){
+	@Override
+	public Groups getById(int gId) {
 		SessionFactory sf = createSessionFactory();
 		Session sess = sf.openSession();
-		List<User> list =null;
+		Groups group;
 		 try {
 			 sess.getTransaction().begin();
-			 list = sess.createCriteria(User.class).list();
+			 group = (Groups)sess.get(Groups.class, gId);
+			 sess.getTransaction().commit();
+		 }
+		 catch (RuntimeException e) {
+			 sess.getTransaction().rollback();
+			 throw e;
+		 }
+	    return group;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Groups> getAllGroups() {
+		SessionFactory sf = createSessionFactory();
+		Session sess = sf.openSession();
+		List<Groups> list =null;
+		 try {
+			 sess.getTransaction().begin();
+			 list = sess.createCriteria(Groups.class).list();
 			 sess.getTransaction().commit();
 		 }
 		 catch (RuntimeException e) {
@@ -105,20 +119,23 @@ public class UserDaoImpl implements UserDao{
 		 }
 	    return list;
 	}
-	//method to return one employee of given id
-	public User getUserById(int uId) {
+
+	@Override
+	public List<User> getAllUsers(int gId) {
 		SessionFactory sf = createSessionFactory();
 		Session sess = sf.openSession();
-		User user;
+		List<User> list =null;
 		 try {
 			 sess.getTransaction().begin();
-			 user = (User)sess.get(User.class, uId);
+			 Groups group = (Groups)sess.get(Groups.class, gId);
+			 if(group != null)
+				 list = group.getgUsers();
 			 sess.getTransaction().commit();
 		 }
 		 catch (RuntimeException e) {
 			 sess.getTransaction().rollback();
 			 throw e;
 		 }
-	    return user;
+	    return list;
 	}
 }

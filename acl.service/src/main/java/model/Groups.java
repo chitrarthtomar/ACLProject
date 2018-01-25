@@ -34,13 +34,11 @@ public class Groups {
 		this.gUsers = gUsers;
 	}
 
-	public Groups(String gName, String gDescription, String gArbitraryAttributes, String gResource, List<User> gUsers) {
-		super();
+	public Groups(String gName, String gDescription, String gArbitraryAttributes, String gResource) {
 		this.gName = gName;
 		this.gDescription = gDescription;
 		this.gArbitraryAttributes = gArbitraryAttributes;
 		this.gResource = gResource;
-		this.gUsers = gUsers;
 	}
 
 	public Groups() {

@@ -17,28 +17,29 @@ public class UserServiceImpl implements UserService{
 	UserDao userDao; 
 	
 	//create user
-	public void createUser(String uName, String uPassword, String uMandatoryAttributes, String uArbitraryAttributes, String uResource){  
-		System.out.println("creating ");
-		userDao.createUser(uName, uPassword, uMandatoryAttributes, uArbitraryAttributes, uResource);
+	public void createUser(String uName, String uPassword,  String uRole, String uMandatoryAttributes, String uArbitraryAttributes, String uResource){  
+		userDao.createUser(uName, uPassword, uRole, uMandatoryAttributes, uArbitraryAttributes, uResource);
 	}  
-	//method to update employee 
 	
-	public void updateUser(String uId, String name){
-		System.out.println("service update");
-		userDao.updateUser(uId, name);   
+	@Override
+	//method to update employee 
+	public void updateUser(int uId, String uName, String uPassword,  String uRole, String uMandatoryAttributes, String uArbitraryAttributes, String uResource){
+		userDao.updateUser(uId, uName, uPassword, uRole, uMandatoryAttributes, uArbitraryAttributes, uResource);   
 	}  
-	//method to delete employee 
-	public void deleteUser(User e){  
-		return;  
+	
+	//method to delete employee
+	@Override
+	public boolean deleteUser(int uId){  
+		return userDao.deleteUser(uId);
 	}  
 	//method to return one employee of given id 
-	
-	public User getById(String id){  
-		return null;   
-	}  
-	//method to return all employees
-	
+	@Override
 	public List<User> getAllUsers(){  
-		return null;   
+		return userDao.getAllUsers();   
+	}
+
+	@Override
+	public User getById(int id) {
+		return userDao.getUserById(id);
 	}
 }

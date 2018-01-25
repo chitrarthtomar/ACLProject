@@ -36,13 +36,14 @@ public class App {
 	User u1=new User();
 	u1.setuName("Aditi Giri");
 	u1.setuPassword("Hello");
+	u1.setuRole("user");
 	u1.setuResource(res.toString());
 	u1.setuMandatoryAttributes(manAtt.toString());
 	u1.setuArbitraryAttributes(arbAtt.toString());
 	
 	List<User> uList = new ArrayList<User>();
 	uList.add(u1);
-	
+		
 	Groups g1=new Groups();
 	g1.setgName("Senior Employees");
 	g1.setgDescription("Access to maximum things");

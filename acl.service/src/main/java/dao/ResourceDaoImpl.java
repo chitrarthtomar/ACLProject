@@ -2,26 +2,21 @@ package dao;
 
 import java.util.List;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import dao.UserDao;
-import model.Groups;
+import model.Resource;
 import model.User;
 
-@Repository
 @Transactional
-public class UserDaoImpl implements UserDao{
-	
+@Repository
+public class ResourceDaoImpl implements ResourceDao{
 	
 	@Autowired
     private static SessionFactory sessionFactory;
@@ -33,52 +28,55 @@ public class UserDaoImpl implements UserDao{
 	    sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 	    return sessionFactory;
 	}
-	//method to create user
-	public int createUser(String uName, String uPassword, String uRole, String uMandatoryAttributes, String uArbitraryAttributes, String uResource){
+	
+	@Override
+	public int createResource(String rName, String rPermissions) {
 		SessionFactory sf = createSessionFactory();
 		Session sess = sf.openSession();
-		int uId=-1; // review this later
+		int rId=-1; // review this later
 		 try {
 			 sess.getTransaction().begin();
-			 User user = new User(uName,uPassword, uRole, uMandatoryAttributes, uArbitraryAttributes, uResource);
-			 uId= (Integer)sess.save(user);
+			 Resource resource = new Resource(rName,rPermissions);
+			 rId= (Integer)sess.save(resource);
 			 sess.getTransaction().commit();
 		 }
 		 catch (RuntimeException e) {
 			 sess.getTransaction().rollback();
 			 throw e;
 		 }
-		 return uId;
-	}  
-	
-	//method to update employee  
-	public void updateUser(int uId, String uName, String uPassword,  String uRole, String uMandatoryAttributes, String uArbitraryAttributes, String uResource){ 
-		 SessionFactory sf = createSessionFactory();
+		 return rId;
+	}
+
+	@Override
+	public void updateResource(int rId, String rName, String rPermissions) {
+		SessionFactory sf = createSessionFactory();
 		 Session sess = sf.openSession();
 		 try {
 			 sess.getTransaction().begin(); 
-		     if(!this.deleteUser(uId)) {
+		     if(!this.deleteResource(rId)) {
 		    	 return;
 		     }
-		     this.createUser(uName, uPassword, uRole, uMandatoryAttributes, uArbitraryAttributes, uResource);
+		     this.createResource(rName, rPermissions);
 			 sess.getTransaction().commit();
 		 }
 		 catch (RuntimeException e) {
 			 sess.getTransaction().rollback();
 			 throw e;
 		 }
-	}  
-	//method to delete employee  
-	public boolean deleteUser(int uId){
+		
+	}
+
+	@Override
+	public boolean deleteResource(int rId) {
 		SessionFactory sf = createSessionFactory();
 		 Session sess = sf.openSession();
 		 try {
 			 sess.getTransaction().begin();
-			 User user = (User)sess.get(User.class, uId);
-			 if(user==null) {
+			 Resource resource = (Resource)sess.get(Resource.class, rId);
+			 if(resource==null) {
 				 return false; // if user is not present do nothing
 			 }
-		     sess.delete(user);
+		     sess.delete(resource);
 			 sess.getTransaction().commit();
 		 }
 		 catch (RuntimeException e) {
@@ -86,17 +84,34 @@ public class UserDaoImpl implements UserDao{
 			 throw e;
 		 }
 		 return true;
-	}  
+	}
 
-	//method to return all employees  
-	@SuppressWarnings("unchecked")
-	public List<User> getAllUsers(){
+	@Override
+	public Resource getById(int rId) {
 		SessionFactory sf = createSessionFactory();
 		Session sess = sf.openSession();
-		List<User> list =null;
+		Resource resource;
 		 try {
 			 sess.getTransaction().begin();
-			 list = sess.createCriteria(User.class).list();
+			 resource = (Resource)sess.get(Resource.class, rId);
+			 sess.getTransaction().commit();
+		 }
+		 catch (RuntimeException e) {
+			 sess.getTransaction().rollback();
+			 throw e;
+		 }
+	    return resource;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Resource> getAllResources() {
+		SessionFactory sf = createSessionFactory();
+		Session sess = sf.openSession();
+		List<Resource> list =null;
+		 try {
+			 sess.getTransaction().begin();
+			 list = sess.createCriteria(Resource.class).list();
 			 sess.getTransaction().commit();
 		 }
 		 catch (RuntimeException e) {
@@ -105,20 +120,5 @@ public class UserDaoImpl implements UserDao{
 		 }
 	    return list;
 	}
-	//method to return one employee of given id
-	public User getUserById(int uId) {
-		SessionFactory sf = createSessionFactory();
-		Session sess = sf.openSession();
-		User user;
-		 try {
-			 sess.getTransaction().begin();
-			 user = (User)sess.get(User.class, uId);
-			 sess.getTransaction().commit();
-		 }
-		 catch (RuntimeException e) {
-			 sess.getTransaction().rollback();
-			 throw e;
-		 }
-	    return user;
-	}
+
 }

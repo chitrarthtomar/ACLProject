@@ -9,14 +9,16 @@ import model.User;
 
 public interface UserService {
 	
+	
+	//return type is void in services and int in dao
 	//method to create user
-	public void createUser(String uName, String uPassword, String uMandatoryAttributes, String uArbitraryAttributes, String uResource);  
-	//method to update employee  
-	public void updateUser(String uId, String name);  
-	//method to delete employee  
-	public void deleteUser(User e);  
-	//method to return one employee of given id  
-	public User getById(String id);  
-	//method to return all employees  
+	public void createUser(String uName, String uPassword,  String uRole, String uMandatoryAttributes, String uArbitraryAttributes, String uResource);  
+	//method to update user  
+	public void updateUser(int uId, String uName, String uPassword, String uRole, String uMandatoryAttributes, String uArbitraryAttributes, String uResource);  
+	//method to delete user  
+	public boolean deleteUser(int uId);  
+	//method to return one user of given id  
+	public User getById(int id);  
+	//method to return all users  
 	public List<User> getAllUsers();  
 }

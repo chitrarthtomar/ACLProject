@@ -13,8 +13,7 @@ public class Resource {
 	private String rName;
 	private String rPermissions;
 	
-	public Resource(int rId, String rName, String rPermissions) {
-		this.rId = rId;
+	public Resource(String rName, String rPermissions) {
 		this.rName = rName;
 		this.rPermissions = rPermissions;
 	}

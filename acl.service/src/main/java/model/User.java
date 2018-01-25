@@ -1,54 +1,45 @@
 package model;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.JoinColumn;
-
 
 @Entity
 public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int uId;
-//	@ManyToMany(mappedBy="gUsers")
-//	private List<Groups> uGroups;
 	private String uName;
 	private String uPassword;
+	private String uRole;
 	private String uMandatoryAttributes;
 	private String uArbitraryAttributes;
 	private String uResource;
 	public User(){
 	}
 	
-	public User(String uName, String uPassword, String uMandatoryAttributes,
+	public User(String uName, String uPassword,String uRole, String uMandatoryAttributes,
 			String uArbitraryAttributes, String uResource) {
 		super();
 		this.uName = uName;
+		this.uRole = uRole;
 		this.uPassword = uPassword;
 		this.uMandatoryAttributes = uMandatoryAttributes;
 		this.uArbitraryAttributes = uArbitraryAttributes;
 		this.uResource = uResource;
 	}
-
-//	public List<Groups> getuGroups() {
-//		return uGroups;
-//	}
-//
-//	public void setuGroups(List<Groups> uGroups) {
-//		this.uGroups = uGroups;
-//	}
 	public int getuId() {
 		return uId;
 	}
 	public void setuId(int uId) {
 		this.uId = uId;
+	}
+	public String getuRole() {
+		return uRole;
+	}
+	public void setuRole(String uRole) {
+		this.uRole = uRole;
 	}
 	public String getuMandatoryAttributes() {
 		return uMandatoryAttributes;
