@@ -1,13 +1,13 @@
 
 	<div class="wrap" >
 		
-        <div class="centreleft" ng-controller="centreCtrl">
+        <div class="centreleft" ng-controller="userListCtrl">
             <button ng-click="">Back</button>
             <span>Search</span>
             <p><input type="text" ng-model="user_name"></p>
             <ul>
               <li ng-repeat="user in users | filter:user_name">
-                {{ user }}
+                  <input type="button" value="{{user.uName}}" ng-click="selectUser(user.uId)"/><br>
               </li>
             </ul>
             <button ng-click="">Add</button>

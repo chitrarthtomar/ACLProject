@@ -1,9 +1,9 @@
 
 			<div ng-controller="userInfoCtrl">
 				User ID:
-				<label id="userId" ></label><br>
+				<input type="text" id="userId" value="{{user.uId}}" />
 				Name:
-				<label id="userName" ></label><br>
+				<input type="text" id="userName" value="{{user.uName}}">
 				Mandatory Attributes:
 				<table border="1">
 					<tr ng-repeat="(key, value) in manAttrList">

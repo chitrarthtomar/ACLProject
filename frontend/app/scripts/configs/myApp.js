@@ -30,14 +30,28 @@ angular.module('myApp').config(['$stateProvider','USER_ROLES', function( $stateP
       });
       $stateProvider.state('adminGroupList',{
         url : "/admin/groups",
-        templateUrl : "./views/admin/GroupList.html",
+        templateUrl : "./views/admin/GroupStates/GroupList.html",
         data : {
             authorizedRoles : [USER_ROLES.admin, USER_ROLES.superAdmin]
         }
       });
       $stateProvider.state('groupsInfo',{
         url : "/admin/groups/:id",
-        templateUrl : "./views/admin/GroupInfo.html",
+        templateUrl : "./views/admin/GroupStates/GroupInfo.html",
+        data : {
+            authorizedRoles : [USER_ROLES.admin, USER_ROLES.superAdmin]
+        }
+      });
+      $stateProvider.state('adminUserList',{
+        url : "/admin/users",
+        templateUrl : "./views/admin/UserStates/UserList.html",
+        data : {
+            authorizedRoles : [USER_ROLES.admin, USER_ROLES.superAdmin]
+        }
+      });
+      $stateProvider.state('userInfo',{
+        url : "/admin/users/:id",
+        templateUrl : "./views/admin/UserStates/UserInfo.html",
         data : {
             authorizedRoles : [USER_ROLES.admin, USER_ROLES.superAdmin]
         }
