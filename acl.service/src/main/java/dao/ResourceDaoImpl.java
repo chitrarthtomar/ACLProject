@@ -32,16 +32,16 @@ public class ResourceDaoImpl implements ResourceDao{
 	@Override
 	public int createResource(String rName, String rPermissions) {
 		SessionFactory sf = createSessionFactory();
-		Session sess = sf.openSession();
+		Session session = sf.openSession();
 		int rId=-1; // review this later
 		 try {
-			 sess.getTransaction().begin();
+			 session.getTransaction().begin();
 			 Resource resource = new Resource(rName,rPermissions);
-			 rId= (Integer)sess.save(resource);
-			 sess.getTransaction().commit();
+			 rId= (Integer)session.save(resource);
+			 session.getTransaction().commit();
 		 }
 		 catch (RuntimeException e) {
-			 sess.getTransaction().rollback();
+			 session.getTransaction().rollback();
 			 throw e;
 		 }
 		 return rId;
@@ -50,17 +50,19 @@ public class ResourceDaoImpl implements ResourceDao{
 	@Override
 	public void updateResource(int rId, String rName, String rPermissions) {
 		SessionFactory sf = createSessionFactory();
-		 Session sess = sf.openSession();
+		 Session session = sf.openSession();
+		 Resource resource = (Resource) session.get(Resource.class, rId);
+		 if(resource == null)
+			 return;
 		 try {
-			 sess.getTransaction().begin(); 
-		     if(!this.deleteResource(rId)) {
-		    	 return;
-		     }
-		     this.createResource(rName, rPermissions);
-			 sess.getTransaction().commit();
+			 session.getTransaction().begin(); 
+		     resource.setrName(rName);
+		     resource.setrPermissions(rPermissions);
+		     session.update(resource);
+			 session.getTransaction().commit();
 		 }
 		 catch (RuntimeException e) {
-			 sess.getTransaction().rollback();
+			 session.getTransaction().rollback();
 			 throw e;
 		 }
 		
@@ -69,18 +71,18 @@ public class ResourceDaoImpl implements ResourceDao{
 	@Override
 	public boolean deleteResource(int rId) {
 		SessionFactory sf = createSessionFactory();
-		 Session sess = sf.openSession();
+		 Session session = sf.openSession();
 		 try {
-			 sess.getTransaction().begin();
-			 Resource resource = (Resource)sess.get(Resource.class, rId);
+			 session.getTransaction().begin();
+			 Resource resource = (Resource)session.get(Resource.class, rId);
 			 if(resource==null) {
 				 return false; // if user is not present do nothing
 			 }
-		     sess.delete(resource);
-			 sess.getTransaction().commit();
+		     session.delete(resource);
+			 session.getTransaction().commit();
 		 }
 		 catch (RuntimeException e) {
-			 sess.getTransaction().rollback();
+			 session.getTransaction().rollback();
 			 throw e;
 		 }
 		 return true;
@@ -89,15 +91,15 @@ public class ResourceDaoImpl implements ResourceDao{
 	@Override
 	public Resource getById(int rId) {
 		SessionFactory sf = createSessionFactory();
-		Session sess = sf.openSession();
+		Session session = sf.openSession();
 		Resource resource;
 		 try {
-			 sess.getTransaction().begin();
-			 resource = (Resource)sess.get(Resource.class, rId);
-			 sess.getTransaction().commit();
+			 session.getTransaction().begin();
+			 resource = (Resource)session.get(Resource.class, rId);
+			 session.getTransaction().commit();
 		 }
 		 catch (RuntimeException e) {
-			 sess.getTransaction().rollback();
+			 session.getTransaction().rollback();
 			 throw e;
 		 }
 	    return resource;
@@ -107,15 +109,15 @@ public class ResourceDaoImpl implements ResourceDao{
 	@Override
 	public List<Resource> getAllResources() {
 		SessionFactory sf = createSessionFactory();
-		Session sess = sf.openSession();
+		Session session = sf.openSession();
 		List<Resource> list =null;
 		 try {
-			 sess.getTransaction().begin();
-			 list = sess.createCriteria(Resource.class).list();
-			 sess.getTransaction().commit();
+			 session.getTransaction().begin();
+			 list = session.createCriteria(Resource.class).list();
+			 session.getTransaction().commit();
 		 }
 		 catch (RuntimeException e) {
-			 sess.getTransaction().rollback();
+			 session.getTransaction().rollback();
 			 throw e;
 		 }
 	    return list;

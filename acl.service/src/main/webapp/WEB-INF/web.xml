@@ -34,6 +34,10 @@
       <param-name>cors.supportedHeaders</param-name>
       <param-value>Content-Type,Accept,Origin</param-value>
    </init-param>
+   <init-param>
+    <param-name>cors.supportedMethods</param-name>
+    <param-value>GET, HEAD, POST, PUT, OPTIONS, DELETE</param-value>
+	</init-param>
 	</filter>
 	
 	<filter-mapping>

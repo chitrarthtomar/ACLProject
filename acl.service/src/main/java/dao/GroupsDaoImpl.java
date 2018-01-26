@@ -28,16 +28,17 @@ public class GroupsDaoImpl implements GroupsDao{
 	    sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 	    return sessionFactory;
 	}
-
+	
 	@Override
-	public int createGroup(String gName, String gDescription, String gArbitraryAttributes, String gResource) {
+	public int createGroup(String gName, String gDescription, String gArbitraryAttributes, String gResource, List<User> gUsers) {
 		SessionFactory sf = createSessionFactory();
 		Session sess = sf.openSession();
 		int gId=-1; // review this later
 		 try {
 			 sess.getTransaction().begin();
 			 Groups group = new Groups(gName,gDescription,gArbitraryAttributes, gResource);
-			 gId= (Integer)sess.save(group);
+			 group.setgUsers(null);
+			 gId= (Integer)sess.save(group);//check this out later
 			 sess.getTransaction().commit();
 		 }
 		 catch (RuntimeException e) {
@@ -51,12 +52,16 @@ public class GroupsDaoImpl implements GroupsDao{
 	public void updateGroup(int gId, String gName, String gDescription, String gArbitraryAttributes, String gResource) {
 		SessionFactory sf = createSessionFactory();
 		 Session sess = sf.openSession();
+		 Groups prevGroup = (Groups) sess.get(Groups.class, gId);
+		 if(prevGroup == null)
+			 return;
 		 try {
-			 sess.getTransaction().begin(); 
-		     if(!this.deleteGroup(gId)) {
-		    	 return;
-		     }
-		     this.createGroup(gName,gDescription,gArbitraryAttributes, gResource);
+			 sess.getTransaction().begin();
+			 prevGroup.setgArbitraryAttributes(gArbitraryAttributes);
+			 prevGroup.setgDescription(gDescription);
+			 prevGroup.setgName(gName);
+			 prevGroup.setgResource(gResource);
+			 sess.update(prevGroup);
 			 sess.getTransaction().commit();
 		 }
 		 catch (RuntimeException e) {

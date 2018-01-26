@@ -20,10 +20,21 @@ public class App {
 	r1.setrName("Pantry");
 	r1.setrPermissions("Enter");
 	
-	JSONObject res=new 	JSONObject();    
-	res.put("rId",11);    
-	res.put("rName","Pantry");    
-	res.put("rPermission","Enter"); 
+	JSONObject res= new	JSONObject();    
+	res.put("rId",1);
+	res.put("rName","Pantry");
+	res.put("rPermission","Enter");
+	
+	JSONObject res1= new JSONObject();    
+	res1.put("rId",2);
+	res1.put("rName","Obs");
+	res1.put("rPermission","obj");
+	
+	List<JSONObject> gRes = new ArrayList<>();
+	gRes.add(res);
+	gRes.add(res1);
+	
+	System.out.println(gRes.toString());
 	
 	//mandatory attribute
 	JSONObject manAtt=new JSONObject();    
@@ -37,17 +48,17 @@ public class App {
 	u1.setuName("Aditi Giri");
 	u1.setuPassword("Hello");
 	u1.setuRole("user");
-	u1.setuResource(res.toString());
+	u1.setuResource(gRes.toString());
 	u1.setuMandatoryAttributes(manAtt.toString());
 	u1.setuArbitraryAttributes(arbAtt.toString());
 	
-	List<User> uList = new ArrayList<User>();
+	List<User> uList = new ArrayList<>();
 	uList.add(u1);
-		
+	
 	Groups g1=new Groups();
 	g1.setgName("Senior Employees");
 	g1.setgDescription("Access to maximum things");
-	g1.setgResource(res.toString());
+	g1.setgResource(gRes.toString());
 	g1.setgArbitraryAttributes(res.toString());
 	g1.setgUsers(uList);
 	

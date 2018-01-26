@@ -7,7 +7,7 @@ import model.User;
 public interface GroupsDao {
 	
 	//method to create group
-		public int createGroup(String gName, String gDescription, String gArbitraryAttributes, String gResource);  
+		public int createGroup(String gName, String gDescription, String gArbitraryAttributes, String gResource, List<User> gUsers);  
 		//method to update group  
 		public void updateGroup(int gId, String gName, String gDescription, String gArbitraryAttributes, String gResource);  
 		//method to delete group  

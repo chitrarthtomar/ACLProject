@@ -55,17 +55,23 @@ public class UserDaoImpl implements UserDao{
 	//method to update employee  
 	public void updateUser(int uId, String uName, String uPassword,  String uRole, String uMandatoryAttributes, String uArbitraryAttributes, String uResource){ 
 		 SessionFactory sf = createSessionFactory();
-		 Session sess = sf.openSession();
+		 Session session = sf.openSession();
+		 User user = (User)session.get(User.class, uId);
+		 if(user == null)
+			 return;
 		 try {
-			 sess.getTransaction().begin(); 
-		     if(!this.deleteUser(uId)) {
-		    	 return;
-		     }
-		     this.createUser(uName, uPassword, uRole, uMandatoryAttributes, uArbitraryAttributes, uResource);
-			 sess.getTransaction().commit();
+			 session.getTransaction().begin(); 
+			 user.setuName(uName);
+			 user.setuPassword(uPassword);
+			 user.setuResource(uResource);
+			 user.setuArbitraryAttributes(uArbitraryAttributes);
+			 user.setuMandatoryAttributes(uMandatoryAttributes);
+			 user.setuRole(uRole);
+			 session.update(user);
+			 session.getTransaction().commit();
 		 }
 		 catch (RuntimeException e) {
-			 sess.getTransaction().rollback();
+			 session.getTransaction().rollback();
 			 throw e;
 		 }
 	}  
@@ -131,9 +137,10 @@ public class UserDaoImpl implements UserDao{
 			 sess.getTransaction().begin();
 			 String hql = "From User where uName='"+name+"' AND uPassword = '"+password+"'";
 			 Query query = sess.createQuery(hql);
-			 List list = query.list();
+			 @SuppressWarnings("unchecked")
+			List<User> list = query.list();
 			 if(!list.isEmpty())
-				 user = (User) list.get(0);
+				 user = list.get(0);
 			 sess.getTransaction().commit();
 		 }
 		 catch (RuntimeException e) {

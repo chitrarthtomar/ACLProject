@@ -16,7 +16,7 @@ import javax.persistence.JoinColumn;
 public class Groups {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.TABLE)
 	private int gId;
 	private String gName;
 	private String gDescription;

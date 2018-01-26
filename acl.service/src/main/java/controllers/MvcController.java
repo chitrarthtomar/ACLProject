@@ -1,18 +1,12 @@
 package controllers;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;  
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,6 +19,7 @@ import authentication.TokenAuthentication;
 import dto.GroupsListDto;
 import dto.LoginDto;
 import dto.LoginResponseDto;
+import dto.ResourceListDto;
 import dto.UserListDto;
 import model.Groups;
 import model.Resource;
@@ -44,8 +39,6 @@ public class MvcController {
 	@Autowired
 	ResourceService resourceService;
 	TokenAuthentication tokenauth = new TokenAuthentication();
-
-	
     @RequestMapping(value = "/login", method = RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE , produces = "application/json")  
     public LoginResponseDto viewuser(@RequestBody LoginDto loginDto){  
         EncryptionEngine encryptionEngine = new EncryptionEngine();
@@ -53,9 +46,6 @@ public class MvcController {
         String password = encryptionEngine.encryptWithMD5(loginDto.getPassword());
 
         User user = userService.authenticateUser(username, password);
-//        String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-//        
-//        String sessionId = encryptionEngine.encryptWithMD5(timeStamp);
         LoginResponseDto obj = new LoginResponseDto();
         if(user!=null) {
         	String token = tokenauth.addToken(username);
@@ -73,6 +63,7 @@ public class MvcController {
 		userService.createUser("test", "test", "4", uMandatoryAttributes.toString(), uArbitraryAttributes.toString(), uResource);
 		return new ModelAndView("redirect:/");
     }
+    
     @RequestMapping(value = "/users", method = RequestMethod.POST, produces = "application/json")  
     public List<UserListDto> users(@RequestParam(value="userid", required=true) String uid){  
         List<User> users = userService.getAllUsers();
@@ -99,15 +90,17 @@ public class MvcController {
         return groupList;
     }
     
-    @RequestMapping(value = "/groups/{gId}", method = RequestMethod.GET, produces = "application/json")  
-    public Groups group(@PathVariable int gId){
-        return groupService.getById(gId);
-    }
-    
-    @RequestMapping(value = "/resources", method = RequestMethod.POST, produces = "application/json")  
-    public ModelAndView resources(@RequestParam(value="userid", required=true) String uid){  
+    @RequestMapping(value = "/resources", method = RequestMethod.GET, produces = "application/json")  
+    public List<ResourceListDto> resources(){  
         List<Resource> resources = resourceService.getAllResources();
-        return new ModelAndView("redirect:/");
+        List<ResourceListDto> resourceList = new ArrayList<>();
+        for(Resource r:resources) {
+        	ResourceListDto t = new ResourceListDto();
+        	t.setrId(r.getrId());
+        	t.setrName(r.getrName());
+        	resourceList.add(t);
+        }
+        return resourceList;
     }
 
 }

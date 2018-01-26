@@ -15,9 +15,10 @@ public class GroupServiceImpl implements GroupService{
 	@Autowired
 	GroupsDao groupDao;
 
+	// ***************REVIEW LATER**********************
 	@Override
-	public void createGroup(String gName, String gDescription, String gArbitraryAttributes, String gResource) {
-		groupDao.createGroup(gName, gDescription, gArbitraryAttributes, gResource);
+	public void createGroup(String gName, String gDescription, String gArbitraryAttributes, String gResource, List<User> gUsers) {
+		groupDao.createGroup(gName, gDescription, gArbitraryAttributes, gResource, gUsers);
 	}
 
 	@Override
