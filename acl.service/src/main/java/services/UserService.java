@@ -20,5 +20,7 @@ public interface UserService {
 	//method to return one user of given id  
 	public User getById(int id);  
 	//method to return all users  
-	public List<User> getAllUsers();  
+	public List<User> getAllUsers(); 
+	
+	public User authenticateUser(String name,String password);
 }

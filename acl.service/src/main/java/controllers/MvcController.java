@@ -2,8 +2,14 @@ package controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;  
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;  
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import authentication.EncryptionEngine;
+import dto.LoginDto;
 import model.Groups;
 import model.Resource;
 import model.User;
@@ -29,12 +36,14 @@ public class MvcController {
 	@Autowired
 	ResourceService resourceService;
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json")  
-    public ModelAndView viewuser(@RequestParam(value="name", required=true) String name, @RequestParam(value="pass", required=true) String pass){  
+	
+    @RequestMapping(value = "/login", method = RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE , produces = "application/json")  
+    public User viewuser(@RequestBody LoginDto loginDto){  
         EncryptionEngine encryptionEngine = new EncryptionEngine();
-    	System.out.println(name+pass);
-        System.out.println(encryptionEngine.encryptWithMD5("hello"));
-        return new ModelAndView("redirect:/");
+        String username = loginDto.getUsername();
+        String password = encryptionEngine.encryptWithMD5(loginDto.getUsername());
+        User user =userService.authenticateUser(username, password);
+    	return user;
     }
     
     @RequestMapping(value = "/config", method = RequestMethod.POST, produces = "application/json")  

@@ -1,0 +1,40 @@
+
+			<div ng-controller="userAddCtrl">
+				<button ng-click="">Back</button><br><br>
+			  	User ID:<br>
+				<input type="text" ng-model="userIdTxt"><br>
+				Name:<br>
+				<input type="text" ng-model="userNameTxt"><br>
+				Password:<br>
+				<input type="password" ng-model="userPasswordTxt"><br>
+				Arbitrary Attributes:<br>
+				<fieldset  data-ng-repeat="choice in arbitraryChoices">
+					  <select id="arbResDropdown" ng-model="choice.arbResource" ng-options="item for item in arbRes_dd" >
+					  </select>
+					  <select id="arbPermDropdown" ng-model="choice.arbPermission" ng-options="item for item in arbPerm_dd">
+					  </select>
+					  <button class="remove" ng-show="$last" ng-click="arbRemoveChoice()">-</button>
+				</fieldset>
+				<button class="addfields" ng-click="arbAddNewChoice()">Add fields</button>
+					   
+				<div id="manChoicesDisplay1">
+					{{ arbitraryChoices }}
+				</div>
+				<br>
+				Mandatory Attributes:<br>
+				<fieldset  data-ng-repeat="choice in mandatoryChoices">
+					  <select id="manResDropdown" ng-model="choice.manResource" ng-options="item for item in manRes_dd" >
+					  </select>
+					  <select id="manPermDropdown" ng-model="choice.manPermission" ng-options="item for item in manPerm_dd">
+					  </select>
+					  <button class="remove" ng-show="$last" ng-click="manRemoveChoice()">-</button>
+				</fieldset>
+				<button class="addfields" ng-click="manAddNewChoice()">Add fields</button>
+					   
+				<div id="manChoicesDisplay">
+					{{ mandatoryChoices }}
+				</div>
+				<br>
+				<button ng-click="">Add</button><br><br>
+			
+			</div>

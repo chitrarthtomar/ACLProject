@@ -3,6 +3,7 @@ package dao;
 import java.util.List;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -113,6 +114,26 @@ public class UserDaoImpl implements UserDao{
 		 try {
 			 sess.getTransaction().begin();
 			 user = (User)sess.get(User.class, uId);
+			 sess.getTransaction().commit();
+		 }
+		 catch (RuntimeException e) {
+			 sess.getTransaction().rollback();
+			 throw e;
+		 }
+	    return user;
+	}
+	@Override
+	public User authUser(String name, String password) {
+		SessionFactory sf = createSessionFactory();
+		Session sess = sf.openSession();
+		User user = null;
+		 try {
+			 sess.getTransaction().begin();
+			 String hql = "From User where uName='"+name+"' AND uPassword = '"+password+"'";
+			 Query query = sess.createQuery(hql);
+			 List list = query.list();
+			 if(!list.isEmpty())
+				 user = (User) list.get(0);
 			 sess.getTransaction().commit();
 		 }
 		 catch (RuntimeException e) {

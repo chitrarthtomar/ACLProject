@@ -14,5 +14,7 @@ public interface UserDao {
 	//method to return one user of given id  
 	public User getUserById(int id);  
 	//method to return all users  
-	public List<User> getAllUsers();  
+	public List<User> getAllUsers(); 
+	
+	public User authUser(String name, String password);
 }
