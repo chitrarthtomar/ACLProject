@@ -1,15 +1,15 @@
-angular.module('myApp').factory('getGroups',['$http',function($http){
+angular.module('myApp').factory('getGroups',['$http','URL',function($http,URL){
     var grpService = {};
     grpService.getList = function () {
         return $http
-        .get('http://www.mocky.io/v2/5a6af1e8310000a60f1b8964')
+        .get(URL.path+'/groups')
         .then(function (res) { 
           return res.data;
         });
     }
     grpService.getGroupById = function(id) {
         return $http
-        .get('http://www.mocky.io/v2/5a6b29893100005b171b8a48')
+        .get(URL.path+'/groups/'+id)
         .then(function (res){
             return res.data;
         });
