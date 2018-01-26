@@ -43,7 +43,7 @@ public class MvcController {
 	GroupService groupService;
 	@Autowired
 	ResourceService resourceService;
-	TokenAuthentication tokenauth;
+	TokenAuthentication tokenauth = new TokenAuthentication();
 
 	
     @RequestMapping(value = "/login", method = RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE , produces = "application/json")  
@@ -52,14 +52,14 @@ public class MvcController {
         String username = loginDto.getUsername();
         String password = encryptionEngine.encryptWithMD5(loginDto.getPassword());
 
-        User user =userService.authenticateUser(username, password);
+        User user = userService.authenticateUser(username, password);
 //        String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
 //        
 //        String sessionId = encryptionEngine.encryptWithMD5(timeStamp);
         LoginResponseDto obj = new LoginResponseDto();
         if(user!=null) {
-        	String sessionId = tokenauth.addToken(username);
-        	obj.setSessionId(sessionId);
+        	String token = tokenauth.addToken(username);
+        	obj.setSessionId(token);
         	obj.setUser(user);
         }
         return obj;	

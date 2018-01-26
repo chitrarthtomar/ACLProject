@@ -3,13 +3,18 @@ package authentication;
 import java.util.Date;
 import java.util.HashMap;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class TokenAuthentication {
-	private static HashMap<String, Long > tokens = new HashMap<>();
-	private EncryptionEngine encryptionEngine;
+	private static HashMap<String, Long > tokens= new HashMap<>();
+	EncryptionEngine encryptionEngine = new EncryptionEngine();
 	
 	public String addToken(String uName) {
+		//Add if it exists in the map before
+		System.out.println("there");
 		String token = encryptionEngine.encryptWithMD5(uName);
 		Date date = new Date();
+		System.out.println(token+date.getTime());
 		tokens.put(token , date.getTime());
 		return token;
 	}
@@ -19,7 +24,7 @@ public class TokenAuthentication {
 			return false;
 		}
 		else {
-			if((tokens.get(token)-(new Date()).getTime())>60000) {
+			if(((new Date()).getTime())-tokens.get(token)>60000) {
 				tokens.remove(token);
 				return false;
 			}
