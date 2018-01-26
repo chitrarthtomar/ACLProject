@@ -6,8 +6,8 @@ angular.module('myApp').factory('AuthService', function ($http, Session) {
         .post('http://localhost:8080/acl.service/login',credentials)
         .then(function (res) {
           //console.log(res)
-          Session.create(res.data.id, res.data.user.id,
-                         res.data.user.role);
+          Session.create(res.data.sessionId, res.data.user.uId,
+                         res.data.user.uRole);
           return res.data.user;
         });
     };
