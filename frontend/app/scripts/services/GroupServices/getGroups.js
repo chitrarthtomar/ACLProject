@@ -9,7 +9,7 @@ angular.module('myApp').factory('getGroups',['$http',function($http){
     }
     grpService.getGroupById = function(id) {
         return $http
-        .get('http://www.mocky.io/v2/5a6afd28310000ef0d1b898d')
+        .get('http://www.mocky.io/v2/5a6b29893100005b171b8a48')
         .then(function (res){
             return res.data;
         });

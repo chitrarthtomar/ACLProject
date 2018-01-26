@@ -1,9 +1,9 @@
-<div ng-controller="groupInfoUsersCtrl">
+<div ng-controller="groupInfoCtrl">
     The users in the group are:
     <table border="1">
-        <tr ng-repeat="value in users.user">
+        <tr ng-repeat="value in users">
           <td>User</td>
-          <td>{{value}}</td>  
+          <td>{{value.uName}}</td>  
         </tr>
     </table>
     <br>

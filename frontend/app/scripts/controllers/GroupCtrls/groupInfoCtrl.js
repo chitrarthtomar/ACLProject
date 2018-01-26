@@ -1,27 +1,15 @@
 
 angular.module('myApp').controller('groupInfoCtrl',['$scope','getGroups','$stateParams', function($scope,getGroups,$stateParams) {
 	
-  //   $scope.users ={
-  //   "user" : ["Aditi","Sita","Gita"]
-  // }
-  
-  //   $scope.arbAttrList ={
-  //   "Age" : "35",
-  //   "Height" : "5ft",
-  //   "Hobby" : "reading"
-  // }
-  
-  //   $scope.permissions ={
-  //   "Pantry" : "Enter",
-  //   "Food" : "Eat",
-  // }
+ 
   $scope.id = $stateParams.id;
   getGroups.getGroupById($scope.id).then(function(group){
     console.log(group);
     $scope.group = group;
-    $scope.arbAttrList = $scope.group.gArbitraryAttributes;
-    $scope.permissions = $scope.group.gResource;
-  })
+    $scope.arbAttrList = JSON.parse($scope.group.gArbitraryAttributes);
+    $scope.permissions = JSON.parse($scope.group.gResource);
+    $scope.users = $scope.group.gUsers;
+  });
   
     
   $scope.choices = [];
