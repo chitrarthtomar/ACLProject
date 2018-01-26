@@ -10,9 +10,10 @@ public class TokenAuthentication {
 	EncryptionEngine encryptionEngine = new EncryptionEngine();
 	
 	public String addToken(String uName) {
-		//Add if it exists in the map before
-		System.out.println("there");
 		String token = encryptionEngine.encryptWithMD5(uName);
+		if(tokens.containsKey(token)){
+			deleteToken(token);
+		}
 		Date date = new Date();
 		System.out.println(token+date.getTime());
 		tokens.put(token , date.getTime());
