@@ -3,11 +3,11 @@ angular.module('myApp').factory('AuthService', function ($http, Session) {
    
     authService.login = function (credentials) {
       return $http
-        .post('http://www.mocky.io/v2/5a671d1e2d0000ae12becda5',credentials)
+        .post('http://www.mocky.io/v2/5a6aed8d310000ef0d1b8959',credentials)
         .then(function (res) {
           //console.log(res)
-          Session.create(res.data.id, res.data.user.id,
-                         res.data.user.role);
+          Session.create(res.data.sessionId, res.data.user.uId,
+                         res.data.user.uRole);
           return res.data.user;
         });
     };

@@ -2,9 +2,9 @@
 		
 			<div ng-controller="groupInfoCtrl">
 				Name:
-				<label id="userName" ></label><br>
+				<input id="userName" type="text" value="{{group.gName}}"/ ><br>
 				Description:
-				<label id="userName" ></label><br>
+				<input id="description" type="textarea" value="{{group.gDescription}}"/><br>
 	
 				Arbitrary Attributes:
 				<table border="1">
@@ -14,6 +14,18 @@
 					</tr>
 				</table>
 				<br>
+				
+				<fieldset  data-ng-repeat="choice in choices">
+					<select id="resourceDropdown" ng-model="choice.resource" ng-options="item for item in res_dd" >
+					</select>
+					<select id="permissionDropdown" ng-model="choice.permission" ng-options="item for item in perm_dd">
+					</select>
+					<button class="remove" ng-show="$last" ng-click="removeChoice()">-</button>
+			  </fieldset>
+			  <br/>
+			  <br/>
+
+			  <button class="addfields" ng-click="addNewChoice()">Add fields</button>
 				Permissions:
 				<br>
 				<table border="1">

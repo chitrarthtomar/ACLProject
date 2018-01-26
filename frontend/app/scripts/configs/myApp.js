@@ -36,7 +36,7 @@ angular.module('myApp').config(['$stateProvider','USER_ROLES', function( $stateP
         }
       });
       $stateProvider.state('groupsInfo',{
-        url : "/admin/groups",
+        url : "/admin/groups/:id",
         templateUrl : "./views/admin/GroupInfo.html",
         data : {
             authorizedRoles : [USER_ROLES.admin, USER_ROLES.superAdmin]
@@ -51,7 +51,6 @@ angular.module('myApp').config(['$stateProvider','USER_ROLES', function( $stateP
       var authorizedRoles = next.data.authorizedRoles;
       console.log(authorizedRoles);
       if (!AuthService.isAuthorized(authorizedRoles)) {
-        console.log("oops");
         event.preventDefault();
         if (AuthService.isAuthenticated()) {
           // user is not allowed
