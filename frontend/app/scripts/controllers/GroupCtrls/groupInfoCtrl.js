@@ -3,11 +3,11 @@ angular.module('myApp').controller('groupInfoCtrl',['$scope','getGroups','$state
 	
  
   $scope.id = $stateParams.id;
-  getGroups.getGroupById($scope.id).then(function(group){
-    console.log(group);
-    $scope.group = group;
+  getGroups.getGroupById($scope.id).then(function(res){
+    
+    $scope.group = res.group;
     $scope.arbAttrList = JSON.parse($scope.group.gArbitraryAttributes);
-    $scope.permissions = JSON.parse($scope.group.gResource);
+     $scope.permissions = JSON.parse($scope.group.gResource);
     $scope.users = $scope.group.gUsers;
   });
   

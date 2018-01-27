@@ -7,6 +7,13 @@ angular.module('myApp').config(['$stateProvider','USER_ROLES', function( $stateP
           authorizedRoles : [USER_ROLES.all]
       }
     });
+    $stateProvider.state('logout',{
+      url : "/logout",
+      templateUrl: "./views/logout/logout.html",
+      data : {
+          authorizedRoles : [USER_ROLES.all]
+      }
+    });
     $stateProvider.state('profile',{
         url : "/profile",
         templateUrl: "./views/profile/profile.html",

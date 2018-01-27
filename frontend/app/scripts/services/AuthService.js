@@ -8,7 +8,7 @@ angular.module('myApp').factory('AuthService', function ($http, Session,URL) {
           //console.log(res)
           Session.create(res.data.sessionId, res.data.user.uId,
                          res.data.user.uRole);
-          return res.data.user;
+          return res.data;
         });
     };
    
