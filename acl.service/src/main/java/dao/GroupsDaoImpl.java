@@ -91,6 +91,8 @@ public class GroupsDaoImpl implements GroupsDao {
 			if (group == null) {
 				return false; // if user is not present do nothing
 			}
+			group.setgUsers(null);
+			sess.update(group);
 			sess.delete(group);
 			sess.getTransaction().commit();
 		} catch (RuntimeException e) {

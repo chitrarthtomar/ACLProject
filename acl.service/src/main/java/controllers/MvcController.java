@@ -70,7 +70,6 @@ public class MvcController {
 		String uResource = null;
 		String uArbitraryAttributes = null;
 		User dummyGuy = userService.authenticateUser("test", "test");
-		;
 		if (dummyGuy == null)
 			userService.createUser("test", "test", "dummy", config.getMandatoryAttributes().toString(),
 					uArbitraryAttributes, uResource);
@@ -103,7 +102,7 @@ public class MvcController {
 	public List<GroupsListDto> groups(@RequestParam(value = "token", required = true) String token) {
 		if (!tokenauth.checkToken(token) || !tokenauth.checkAdmin(token)) {
 			logger.warn(INFO_1);
-			return null;
+			return new ArrayList<>();
 		}
 		List<Groups> groups = groupService.getAllGroups();
 		List<GroupsListDto> groupList = new ArrayList<>();
@@ -121,7 +120,7 @@ public class MvcController {
 	public List<ResourceListDto> resources(@RequestParam(value = "token", required = true) String token) {
 		if (!tokenauth.checkToken(token) || !tokenauth.checkAdmin(token)) {
 			logger.warn(INFO_1);
-			return null;
+			return new ArrayList<>();
 		}
 		List<Resource> resources = resourceService.getAllResources();
 		List<ResourceListDto> resourceList = new ArrayList<>();
