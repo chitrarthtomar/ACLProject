@@ -1,21 +1,21 @@
 
 		
-			<div ng-controller="resAddCtrl">
-				<button ng-click="">Back</button><br><br>
-				Name:<br>
+			<div class="container" ng-controller="resAddCtrl">
+				<button class="button" ng-click="">Back</button><br><br>
+				<label>Name:</label><br>
 				<input type="text" ng-model="resNameTxt"><br>
-				Permissions:<br>
+				<label>Permissions:</label><br>
 				<fieldset  data-ng-repeat="choice in choices">
 					  <input type="text" ng-model="choice.permission">
 					  <button class="remove" ng-show="$last" ng-click="removeChoice()">-</button>
 				</fieldset>
-				<button class="addfields" ng-click="addNewChoice()">+</button>
+				<button class="button" ng-click="addNewChoice()">+</button>
 					   
 				<div id="choicesDisplay">
 					{{ choices }}
 				</div>
-				<button ng-click="">Add</button>
-				<button ng-click="">Clear</button>
+				<button class="button" ng-click="">Add</button>
+				<button class="button" ng-click="">Clear</button>
 
 			</div>
 				
