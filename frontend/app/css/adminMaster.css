@@ -16,4 +16,15 @@
 
 }
 
+.centreleft{
+	float:left; 
+    width: 50%;
+}
+
+.centreright{
+	float: right;
+    width: 45.5%;
+	margin-left:0.25%;
+}
+
 
