@@ -1,12 +1,12 @@
 
 		
-			<div ng-controller="groupInfoCtrl">
-				Name:
+			<div class="container" ng-controller="groupInfoCtrl">
+				<label>Name:</label>
 				<input id="userName" type="text" value="{{group.gName}}"/ ><br>
-				Description:
+				<label>Description:</label><br>
 				<input id="description" type="textarea" value="{{group.gDescription}}"/><br>
 	
-				Arbitrary Attributes:
+				<label>Arbitrary Attributes:</label>
 				<table border="1">
 					<tr ng-repeat="(key, value) in arbAttrList">
 					  <td>{{key}}</td>
@@ -20,13 +20,14 @@
 					</select>
 					<select id="permissionDropdown" ng-model="choice.permission" ng-options="item for item in perm_dd">
 					</select>
-					<button class="remove" ng-show="$last" ng-click="removeChoice()">-</button>
+					<button class="button" ng-show="$last" ng-click="removeChoice()">-</button>
 			  </fieldset>
-			  <br/>
-			  <br/>
-
-			  <button class="addfields" ng-click="addNewChoice()">Add fields</button>
-				Permissions:
+			  <button class="button" ng-click="addNewChoice()">Add fields</button>
+			  	<div id="choicesDisplay1">
+					{{ choices }}
+				</div>
+			  <br><br>
+				<label>Permissions:</label>
 				<br>
 				<table border="1">
 					<tr ng-repeat="(key, value) in permissions">
@@ -40,10 +41,9 @@
 					  </select>
 					  <select id="permissionDropdown" ng-model="choice.permission" ng-options="item for item in perm_dd">
 					  </select>
-					  <button class="remove" ng-show="$last" ng-click="removeChoice()">-</button>
+					  <button class="button" ng-show="$last" ng-click="removeChoice()">-</button>
 				</fieldset>
-				<button class="addfields" ng-click="addNewChoice()">Add fields</button>
-					   
+				<button class="button" ng-click="addNewChoice()">Add fields</button>					   
 				<div id="choicesDisplay">
 					{{ choices }}
 				</div>

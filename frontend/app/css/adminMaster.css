@@ -1,0 +1,19 @@
+.wrap {
+    width: 100%;
+    overflow:auto;
+}
+
+.fleft {
+    float:left; 
+    width: 15%;
+}
+
+
+.fright {
+	float: right;
+    width: 84.5%;
+	margin-left:0.25%;
+
+}
+
+

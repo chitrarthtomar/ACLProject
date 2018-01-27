@@ -1,13 +1,13 @@
 
-			<div ng-controller="userAddCtrl">
+			<div class="container" ng-controller="userAddCtrl">
 				<button ng-click="">Back</button><br><br>
-			  	User ID:<br>
+			  	<label>User ID:</label><br>
 				<input type="text" ng-model="userIdTxt"><br>
-				Name:<br>
+				<label>Name:</label><br>
 				<input type="text" ng-model="userNameTxt"><br>
-				Password:<br>
+				<label>Password:</label><br>
 				<input type="password" ng-model="userPasswordTxt"><br>
-				Arbitrary Attributes:<br>
+				<label>Arbitrary Attributes:</label><br>
 				<fieldset  data-ng-repeat="choice in arbitraryChoices">
 					  <select id="arbResDropdown" ng-model="choice.arbResource" ng-options="item for item in arbRes_dd" >
 					  </select>
@@ -21,7 +21,7 @@
 					{{ arbitraryChoices }}
 				</div>
 				<br>
-				Mandatory Attributes:<br>
+				<label>Mandatory Attributes:</label><br>
 				<fieldset  data-ng-repeat="choice in mandatoryChoices">
 					  <select id="manResDropdown" ng-model="choice.manResource" ng-options="item for item in manRes_dd" >
 					  </select>
