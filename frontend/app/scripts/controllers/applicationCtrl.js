@@ -6,8 +6,7 @@ angular.module('myApp').controller('ApplicationController', function ($scope,
   $scope.currentUser = localStorage.getItem("user");
   $scope.userRoles = USER_ROLES;
   $scope.isAuthorized = AuthService.isAuthorized;
-  $scope.token = null;
-  
+ 
   $scope.setCurrentUser = function (data) {
   $scope.currentUser = data.user;
   $scope.token = data.sessionId;
