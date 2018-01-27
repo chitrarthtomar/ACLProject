@@ -49,29 +49,34 @@ public class MvcController {
         String password = encryptionEngine.encryptWithMD5(loginDto.getPassword());
 
         User user = userService.authenticateUser(username, password);
-        LoginResponseDto obj = new LoginResponseDto();
+        LoginResponseDto obj = null;
         if(user!=null) {
+        	obj = new LoginResponseDto();
         	String token = tokenauth.addToken(username,user.getuRole());
         	obj.setSessionId(token);
         	obj.setUser(user);
         }
-        return obj;	
+        return obj;
     }
     
     @RequestMapping(value = "/config", method = RequestMethod.POST, produces = "application/json")  
     public String configure(@RequestParam(value="token", required=true) String token, @RequestBody ConfigDto config){
-     if(tokenauth.checkToken(token)) {
-      String uResource = null;
-      String uArbitraryAttributes=null;
-      userService.createUser("test", "test", "dummy", config.getMandatoryAttributes().toString(), uArbitraryAttributes, uResource);
-      	return s;
-	     }
-	     return f;
-	    }
+		if(tokenauth.checkToken(token) && tokenauth.checkAdmin(token)) {
+			String uResource = null;
+			String uArbitraryAttributes=null;
+			User dummyGuy = userService.authenticateUser("test", "test");;
+			if(dummyGuy==null)
+				userService.createUser("test", "test", "dummy", config.getMandatoryAttributes().toString(), uArbitraryAttributes, uResource);
+			else
+				userService.updateUser(dummyGuy.getuId(),"test", "test", "dummy", config.getMandatoryAttributes().toString(), uArbitraryAttributes, uResource);
+			return s;
+		}
+		return f;
+	}
     
-    @RequestMapping(value = "/users", method = RequestMethod.POST, produces = "application/json")  
+    @RequestMapping(value = "/users", method = RequestMethod.GET, produces = "application/json")  
     public List<UserListDto> users(@RequestParam(value="token", required=true) String token){  
-    	if(!tokenauth.checkToken(token))
+    	if(!tokenauth.checkToken(token) || !tokenauth.checkAdmin(token))
     		return null;
     	List<User> users = userService.getAllUsers();
         List<UserListDto> userList = new ArrayList<>();
@@ -82,11 +87,11 @@ public class MvcController {
         	userList.add(t);
         }
         return userList;
-
     }
+    
     @RequestMapping(value = "/groups", method = RequestMethod.GET, produces = "application/json")  
     public List<GroupsListDto> groups(@RequestParam(value="token", required=true) String token){
-    	if(!tokenauth.checkToken(token))
+    	if(!tokenauth.checkToken(token) || !tokenauth.checkAdmin(token))
     		return null;
         List<Groups> groups = groupService.getAllGroups();
         List<GroupsListDto> groupList = new ArrayList<>();
@@ -101,7 +106,7 @@ public class MvcController {
     
     @RequestMapping(value = "/resources", method = RequestMethod.GET, produces = "application/json")  
     public List<ResourceListDto> resources(@RequestParam(value="token", required=true) String token){
-    	if(!tokenauth.checkToken(token))
+    	if(!tokenauth.checkToken(token) || !tokenauth.checkAdmin(token))
     		return null;
         List<Resource> resources = resourceService.getAllResources();
         List<ResourceListDto> resourceList = new ArrayList<>();

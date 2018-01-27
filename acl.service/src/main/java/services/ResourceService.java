@@ -6,9 +6,9 @@ import model.Resource;
 
 public interface ResourceService {
 	//method to create Resource
-	public void createResource(String rName, String rPermissions);  
+	public boolean createResource(String rName, String rPermissions);  
 	//method to update Resource  
-	public void updateResource(int rId, String rName, String rPermissions);  
+	public boolean updateResource(int rId, String rName, String rPermissions);  
 	//method to delete Resource  
 	public boolean deleteResource(int rId);  
 	//method to return one Resource of given id  

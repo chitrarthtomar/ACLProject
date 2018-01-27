@@ -35,30 +35,30 @@ public class UserDaoImpl implements UserDao{
 	    return sessionFactory;
 	}
 	//method to create user
-	public int createUser(String uName, String uPassword, String uRole, String uMandatoryAttributes, String uArbitraryAttributes, String uResource){
+	public boolean createUser(String uName, String uPassword, String uRole, String uMandatoryAttributes, String uArbitraryAttributes, String uResource){
 		SessionFactory sf = createSessionFactory();
 		Session sess = sf.openSession();
-		int uId=-1; // review this later
 		 try {
 			 sess.getTransaction().begin();
 			 User user = new User(uName,uPassword, uRole, uMandatoryAttributes, uArbitraryAttributes, uResource);
-			 uId= (Integer)sess.save(user);
+			 sess.save(user);
 			 sess.getTransaction().commit();
 		 }
 		 catch (RuntimeException e) {
 			 sess.getTransaction().rollback();
-			 throw e;
+			 return false;
+			 //throw e;
 		 }
-		 return uId;
+		 return true;
 	}  
 	
 	//method to update employee  
-	public void updateUser(int uId, String uName, String uPassword,  String uRole, String uMandatoryAttributes, String uArbitraryAttributes, String uResource){ 
+	public boolean updateUser(int uId, String uName, String uPassword,  String uRole, String uMandatoryAttributes, String uArbitraryAttributes, String uResource){ 
 		 SessionFactory sf = createSessionFactory();
 		 Session session = sf.openSession();
 		 User user = (User)session.get(User.class, uId);
 		 if(user == null)
-			 return;
+			 return false;
 		 try {
 			 session.getTransaction().begin(); 
 			 user.setuName(uName);
@@ -72,8 +72,10 @@ public class UserDaoImpl implements UserDao{
 		 }
 		 catch (RuntimeException e) {
 			 session.getTransaction().rollback();
-			 throw e;
+			 return false;
+			 //throw e;
 		 }
+		 return true;
 	}  
 	//method to delete employee  
 	public boolean deleteUser(int uId){

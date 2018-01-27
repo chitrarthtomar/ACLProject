@@ -15,14 +15,14 @@ public class ResourceServiceImpl implements ResourceService{
 	ResourceDao resourceDao;
 
 	@Override
-	public void createResource(String rName, String rPermissions) {
-		resourceDao.createResource(rName, rPermissions);
+	public boolean createResource(String rName, String rPermissions) {
+		return resourceDao.createResource(rName, rPermissions);
 		
 	}
 
 	@Override
-	public void updateResource(int rId, String rName, String rPermissions) {
-		resourceDao.updateResource(rId, rName, rPermissions);
+	public boolean updateResource(int rId, String rName, String rPermissions) {
+		return resourceDao.updateResource(rId, rName, rPermissions);
 	}
 
 	@Override

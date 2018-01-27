@@ -30,44 +30,49 @@ public class GroupsDaoImpl implements GroupsDao{
 	}
 	
 	@Override
-	public int createGroup(String gName, String gDescription, String gArbitraryAttributes, String gResource, List<User> gUsers) {
+	public boolean createGroup(String gName, String gDescription, String gArbitraryAttributes, String gResource, List<User> gUsers) {
 		SessionFactory sf = createSessionFactory();
 		Session sess = sf.openSession();
-		int gId=-1; // review this later
 		 try {
 			 sess.getTransaction().begin();
 			 Groups group = new Groups(gName,gDescription,gArbitraryAttributes, gResource);
 			 group.setgUsers(null);
-			 gId= (Integer)sess.save(group);//check this out later
+			 sess.save(group);
 			 sess.getTransaction().commit();
 		 }
 		 catch (RuntimeException e) {
 			 sess.getTransaction().rollback();
-			 throw e;
+			 return false;
+			 //throw e;
+			 
 		 }
-		 return gId;
+		 return true;
 	}
 
 	@Override
-	public void updateGroup(int gId, String gName, String gDescription, String gArbitraryAttributes, String gResource) {
+	public boolean updateGroup(int gId, String gName, String gDescription, String gArbitraryAttributes, String gResource, List<User> gUsers) {
 		SessionFactory sf = createSessionFactory();
 		 Session sess = sf.openSession();
 		 Groups prevGroup = (Groups) sess.get(Groups.class, gId);
+		 
 		 if(prevGroup == null)
-			 return;
+			 return false;
 		 try {
 			 sess.getTransaction().begin();
 			 prevGroup.setgArbitraryAttributes(gArbitraryAttributes);
 			 prevGroup.setgDescription(gDescription);
 			 prevGroup.setgName(gName);
 			 prevGroup.setgResource(gResource);
+			 prevGroup.setgUsers(gUsers);
 			 sess.update(prevGroup);
 			 sess.getTransaction().commit();
 		 }
 		 catch (RuntimeException e) {
 			 sess.getTransaction().rollback();
-			 throw e;
+			 return false;
+			 //throw e;
 		 }
+		 return true;
 	}
 
 	@Override
@@ -85,7 +90,8 @@ public class GroupsDaoImpl implements GroupsDao{
 		 }
 		 catch (RuntimeException e) {
 			 sess.getTransaction().rollback();
-			 throw e;
+			 return false;
+			 //throw e;
 		 }
 		 return true;
 	}

@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -22,8 +24,10 @@ import authentication.TokenAuthentication;
 import dto.GroupDto;
 import model.Groups;
 import model.Resource;
+import model.User;
 import services.GroupService;
 import services.ResourceService;
+import services.UserService;
 
 @RestController
 @RequestMapping("groups")
@@ -32,7 +36,7 @@ public class GroupController {
 	@Autowired
 	GroupService groupService;
 	@Autowired
-	ResourceService resourceService;
+	UserService userService;
     TokenAuthentication tokenauth = new TokenAuthentication();
     String s="success";
     String f="failed";
@@ -40,7 +44,7 @@ public class GroupController {
 	//create new group by sending post req on /groups with the json data of group
 	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")  
     public String create(@RequestParam(value="token", required=true) String token, @RequestBody Groups group){
-		if(tokenauth.checkToken(token)) {
+		if(tokenauth.checkToken(token) && tokenauth.checkAdmin(token)) {
 			groupService.createGroup(group.getgName(), group.getgDescription(), group.getgArbitraryAttributes(), group.getgResource(), group.getgUsers());
 			return s;
 		}
@@ -50,13 +54,22 @@ public class GroupController {
 	//Return the group info + extra
     @RequestMapping(value = "/{gId}", method = RequestMethod.GET, produces = "application/json")  
     public GroupDto group(@RequestParam(value="token", required=true) String token, @PathVariable int gId){
-    	if(!tokenauth.checkToken(token))
+    	if(!tokenauth.checkToken(token) || !tokenauth.checkAdmin(token))
     		return null;
     	GroupDto groupDto = new GroupDto();
     	Groups group = groupService.getById(gId);
-    	
-    	List<Resource> allRes = resourceService.getAllResources();
-    	groupDto.setResources(allRes);
+        List<User> allUsers = userService.getAllUsers();
+        List<User> presentUsers = group.getgUsers();
+        List<User> notPresentUsers = new ArrayList<>();
+        HashSet<Integer> presentUsersSet = new HashSet<>();
+        for(User u: presentUsers) {
+        	presentUsersSet.add(u.getuId());
+        }
+        for(User u: allUsers) {
+        	if(!presentUsersSet.contains(u.getuId()))
+        		notPresentUsers.add(u);
+        }
+        groupDto.setOtherUsers(notPresentUsers);
     	groupDto.setGroup(group);
     	return groupDto;
     }
@@ -65,45 +78,20 @@ public class GroupController {
     @RequestMapping(value = "/{gId}", method = RequestMethod.PUT, consumes = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public String update(@RequestParam(value="token", required=true) String token, @PathVariable int gId,@RequestBody Groups group){
-    	if(!tokenauth.checkToken(token))
+    	if(!tokenauth.checkToken(token) || !tokenauth.checkAdmin(token))
     		return f;
-    	groupService.updateGroup(gId, group.getgName(), group.getgDescription(), group.getgArbitraryAttributes(), group.getgResource());
+    	
+    	
+    	groupService.updateGroup(gId, group.getgName(), group.getgDescription(), group.getgArbitraryAttributes(), group.getgResource(), group.getgUsers());
     	return s;
     }
     
     //delete group
     @RequestMapping(value = "/{gId}", method = RequestMethod.DELETE)  
     public String delete(@RequestParam(value="token", required=true) String token, @PathVariable int gId){
-    	if(!tokenauth.checkToken(token))
+    	if(!tokenauth.checkToken(token) || !tokenauth.checkAdmin(token))
     		return f;
     	groupService.deleteGroup(gId);
     	return s;
     }
-    /*
-	
-    @RequestMapping(value = "/addgroup", method = RequestMethod.POST, produces = "application/json")  
-    public ModelAndView add(@RequestParam(value="name", required=true) String name, @RequestParam(value="pass", required=true) String pass){  
-        EncryptionEngine encryptionEngine = new EncryptionEngine();
-    	System.out.println(name+pass);
-    	System.out.println(encryptionEngine.encryptWithMD5("hello"));
-        return new ModelAndView("redirect:/ ");
-    }
-    
-    @RequestMapping(value = "/removegroup", method = RequestMethod.POST, produces = "application/json")  
-    public ModelAndView removeuser(@RequestParam(value="groupid", required=true) int gId){  
-        groupService.deleteGroup(gId);
-        return new ModelAndView("redirect:/");
-    }
-    
-    @RequestMapping(value = "/updategroup", method = RequestMethod.POST, produces = "application/json")  
-    public ModelAndView updateuser(@RequestParam(value="groupid", required=true) String gid){  
-        
-        return new ModelAndView("redirect:/");
-    }
-    @RequestMapping(value = "/addgrouppermission", method = RequestMethod.POST, produces = "application/json")  
-    public ModelAndView addgrouppermission(@RequestParam(value="userid", required=true) String uid){  
-        
-        return new ModelAndView("redirect:/");
-    }
-    */
 }

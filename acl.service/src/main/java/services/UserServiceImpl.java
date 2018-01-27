@@ -17,14 +17,14 @@ public class UserServiceImpl implements UserService{
 	UserDao userDao; 
 	
 	//create user
-	public void createUser(String uName, String uPassword,  String uRole, String uMandatoryAttributes, String uArbitraryAttributes, String uResource){  
-		userDao.createUser(uName, uPassword, uRole, uMandatoryAttributes, uArbitraryAttributes, uResource);
+	public boolean createUser(String uName, String uPassword,  String uRole, String uMandatoryAttributes, String uArbitraryAttributes, String uResource){  
+		return userDao.createUser(uName, uPassword, uRole, uMandatoryAttributes, uArbitraryAttributes, uResource);
 	}  
 	
 	@Override
 	//method to update employee 
-	public void updateUser(int uId, String uName, String uPassword,  String uRole, String uMandatoryAttributes, String uArbitraryAttributes, String uResource){
-		userDao.updateUser(uId, uName, uPassword, uRole, uMandatoryAttributes, uArbitraryAttributes, uResource);   
+	public boolean updateUser(int uId, String uName, String uPassword,  String uRole, String uMandatoryAttributes, String uArbitraryAttributes, String uResource){
+		return userDao.updateUser(uId, uName, uPassword, uRole, uMandatoryAttributes, uArbitraryAttributes, uResource);   
 	}  
 	
 	//method to delete employee

@@ -1,23 +1,22 @@
 package dto;
-
 import java.util.List;
 
 import model.Groups;
-import model.Resource;
+import model.User;
 
 public class GroupDto {
 	Groups group;
-	List<Resource> resources;
+	List<User> otherUsers;
+	public List<User> getOtherUsers() {
+		return otherUsers;
+	}
+	public void setOtherUsers(List<User> otherUsers) {
+		this.otherUsers = otherUsers;
+	}
 	public Groups getGroup() {
 		return group;
 	}
 	public void setGroup(Groups group) {
 		this.group = group;
 	}
-	public List<Resource> getResources() {
-		return resources;
-	}
-	public void setResources(List<Resource> resources) {
-		this.resources = resources;
-	}	
 }

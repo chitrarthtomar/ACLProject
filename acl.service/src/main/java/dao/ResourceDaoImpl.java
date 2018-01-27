@@ -30,30 +30,30 @@ public class ResourceDaoImpl implements ResourceDao{
 	}
 	
 	@Override
-	public int createResource(String rName, String rPermissions) {
+	public boolean createResource(String rName, String rPermissions) {
 		SessionFactory sf = createSessionFactory();
 		Session session = sf.openSession();
-		int rId=-1; // review this later
 		 try {
 			 session.getTransaction().begin();
 			 Resource resource = new Resource(rName,rPermissions);
-			 rId= (Integer)session.save(resource);
+			 session.save(resource);
 			 session.getTransaction().commit();
 		 }
 		 catch (RuntimeException e) {
 			 session.getTransaction().rollback();
-			 throw e;
+			 return false;
+			 //throw e;
 		 }
-		 return rId;
+		 return true;
 	}
 
 	@Override
-	public void updateResource(int rId, String rName, String rPermissions) {
+	public boolean updateResource(int rId, String rName, String rPermissions) {
 		SessionFactory sf = createSessionFactory();
 		 Session session = sf.openSession();
 		 Resource resource = (Resource) session.get(Resource.class, rId);
 		 if(resource == null)
-			 return;
+			 return false;
 		 try {
 			 session.getTransaction().begin(); 
 		     resource.setrName(rName);
@@ -63,8 +63,10 @@ public class ResourceDaoImpl implements ResourceDao{
 		 }
 		 catch (RuntimeException e) {
 			 session.getTransaction().rollback();
-			 throw e;
+			 return false;
+			 //throw e;
 		 }
+		 return true;
 		
 	}
 

@@ -17,13 +17,13 @@ public class GroupServiceImpl implements GroupService{
 
 	// ***************REVIEW LATER**********************
 	@Override
-	public void createGroup(String gName, String gDescription, String gArbitraryAttributes, String gResource, List<User> gUsers) {
-		groupDao.createGroup(gName, gDescription, gArbitraryAttributes, gResource, gUsers);
+	public boolean createGroup(String gName, String gDescription, String gArbitraryAttributes, String gResource, List<User> gUsers) {
+		return groupDao.createGroup(gName, gDescription, gArbitraryAttributes, gResource, gUsers);
 	}
 
 	@Override
-	public void updateGroup(int gId, String gName, String gDescription, String gArbitraryAttributes, String gResource) {
-		groupDao.updateGroup(gId, gName, gDescription, gArbitraryAttributes, gResource);
+	public boolean updateGroup(int gId, String gName, String gDescription, String gArbitraryAttributes, String gResource, List<User> gUsers) {
+		return groupDao.updateGroup(gId, gName, gDescription, gArbitraryAttributes, gResource, gUsers);
 	}
 
 	@Override

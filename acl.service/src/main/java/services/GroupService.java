@@ -7,9 +7,9 @@ import model.User;
 
 public interface GroupService {
 	//method to create group
-	public void createGroup(String gName, String gDescription, String gArbitraryAttributes, String gResource, List<User> gUsers);  
+	public boolean createGroup(String gName, String gDescription, String gArbitraryAttributes, String gResource, List<User> gUsers);  
 	//method to update group  
-	public void updateGroup(int gId, String gName, String gDescription, String gArbitraryAttributes, String gResource);  
+	public boolean updateGroup(int gId, String gName, String gDescription, String gArbitraryAttributes, String gResource, List<User> gUsers);  
 	//method to delete group  
 	public boolean deleteGroup(int gId);
 	//method to return one group of given id  
