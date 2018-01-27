@@ -10,19 +10,21 @@ import model.Groups;
 import model.User;
 
 @Service("groupService")
-public class GroupServiceImpl implements GroupService{
-	
+public class GroupServiceImpl implements GroupService {
+
 	@Autowired
 	GroupsDao groupDao;
 
 	// ***************REVIEW LATER**********************
 	@Override
-	public boolean createGroup(String gName, String gDescription, String gArbitraryAttributes, String gResource, List<User> gUsers) {
+	public boolean createGroup(String gName, String gDescription, String gArbitraryAttributes, String gResource,
+			List<User> gUsers) {
 		return groupDao.createGroup(gName, gDescription, gArbitraryAttributes, gResource, gUsers);
 	}
 
 	@Override
-	public boolean updateGroup(int gId, String gName, String gDescription, String gArbitraryAttributes, String gResource, List<User> gUsers) {
+	public boolean updateGroup(int gId, String gName, String gDescription, String gArbitraryAttributes,
+			String gResource, List<User> gUsers) {
 		return groupDao.updateGroup(gId, gName, gDescription, gArbitraryAttributes, gResource, gUsers);
 	}
 
@@ -41,10 +43,10 @@ public class GroupServiceImpl implements GroupService{
 	public List<Groups> getAllGroups() {
 		return groupDao.getAllGroups();
 	}
-	
+
 	@Override
-	public List<User> getAllUsers(int gId){
+	public List<User> getAllUsers(int gId) {
 		return groupDao.getAllUsers(gId);
 	}
-	
+
 }

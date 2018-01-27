@@ -9,15 +9,15 @@ import dao.ResourceDao;
 import model.Resource;
 
 @Service("resourceService")
-public class ResourceServiceImpl implements ResourceService{
-	
+public class ResourceServiceImpl implements ResourceService {
+
 	@Autowired
 	ResourceDao resourceDao;
 
 	@Override
 	public boolean createResource(String rName, String rPermissions) {
 		return resourceDao.createResource(rName, rPermissions);
-		
+
 	}
 
 	@Override

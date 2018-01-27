@@ -4,10 +4,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
+import org.apache.log4j.Logger;
+
+import controllers.GroupController;
 
 public class TokenAuthentication {
 	private static HashMap<String, Long> tokens = new HashMap<>();
 	private static HashMap<String, String> userAuthorization = new HashMap<>();
+	private static final Logger logger = Logger.getLogger(GroupController.class);
 	EncryptionEngine encryptionEngine = new EncryptionEngine();
 
 	public String addToken(String uName, String uRole) {
@@ -22,10 +26,12 @@ public class TokenAuthentication {
 	}
 
 	public boolean checkAdmin(String token) {
+		logger.info("Verifying if admin is making the request");
 		return userAuthorization.get(token).equals("admin");
 	}
 
 	public boolean checkToken(String token) {
+		logger.info("Verifying token");
 		if (!tokens.containsKey(token)) {
 			return false;
 		} else {
@@ -38,6 +44,7 @@ public class TokenAuthentication {
 	}
 
 	public void deleteToken(String token) {
+		logger.info("Deleting token");
 		tokens.remove(token);
 		userAuthorization.remove(token);
 	}

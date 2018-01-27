@@ -3,11 +3,13 @@ package dto;
 import org.json.JSONObject;
 
 public class ConfigDto {
-	private JSONObject mandatoryAttributes; 
+	private JSONObject mandatoryAttributes;
+
 	public JSONObject getMandatoryAttributes() {
-	 return mandatoryAttributes;
+		return mandatoryAttributes;
 	}
+
 	public void setMandatoryAttributes(JSONObject mandatoryAttributes) {
-	 this.mandatoryAttributes = mandatoryAttributes;
+		this.mandatoryAttributes = mandatoryAttributes;
 	}
 }
