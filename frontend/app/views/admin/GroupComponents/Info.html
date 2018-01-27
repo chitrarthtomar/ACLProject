@@ -22,10 +22,11 @@
 					</select>
 					<button class="remove" ng-show="$last" ng-click="removeChoice()">-</button>
 			  </fieldset>
-			  <br/>
-			  <br/>
-
 			  <button class="addfields" ng-click="addNewChoice()">Add fields</button>
+			  	<div id="choicesDisplay1">
+					{{ choices }}
+				</div>
+			  <br><br>
 				Permissions:
 				<br>
 				<table border="1">
@@ -42,8 +43,7 @@
 					  </select>
 					  <button class="remove" ng-show="$last" ng-click="removeChoice()">-</button>
 				</fieldset>
-				<button class="addfields" ng-click="addNewChoice()">Add fields</button>
-					   
+				<button class="addfields" ng-click="addNewChoice()">Add fields</button>					   
 				<div id="choicesDisplay">
 					{{ choices }}
 				</div>
