@@ -63,6 +63,20 @@ angular.module('myApp').config(['$stateProvider','USER_ROLES', function( $stateP
             authorizedRoles : [USER_ROLES.admin, USER_ROLES.superAdmin]
         }
       });
+      $stateProvider.state('adminResourceList',{
+        url : "/admin/resources",
+        templateUrl : "./views/admin/ResourceStates/ResourceList.html",
+        data : {
+            authorizedRoles : [USER_ROLES.admin, USER_ROLES.superAdmin]
+        }
+      });
+      $stateProvider.state('resourceInfo',{
+        url : "/admin/resources/:id",
+        templateUrl : "./views/admin/ResourceStates/ResourceInfo.html",
+        data : {
+            authorizedRoles : [USER_ROLES.admin, USER_ROLES.superAdmin]
+        }
+      });
   }]);
   
   
