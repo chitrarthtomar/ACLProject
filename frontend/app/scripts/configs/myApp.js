@@ -80,6 +80,13 @@ angular.module('myApp').config(['$stateProvider','USER_ROLES', function( $stateP
             authorizedRoles : [USER_ROLES.admin, USER_ROLES.superAdmin]
         }
       });
+      $stateProvider.state('groupAdd',{
+        url : "/admin/groups",
+        templateUrl : "./views/admin/GroupStates/GroupAdd.html",
+        data : {
+            authorizedRoles : [USER_ROLES.admin, USER_ROLES.superAdmin]
+        }
+      });
   }]);
   
   /**

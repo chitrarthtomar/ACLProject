@@ -6,5 +6,8 @@ angular.module('myApp').controller('groupsListCtrl',["$state","$scope","getGroup
 		$scope.selectGroup = function(id) {
 			$state.transitionTo('groupsInfo',{"id": id});
 		}
+		$scope.addGroup = function(){
+			$state.transitionTo('groupAdd');
+		}
 		
 }]);	

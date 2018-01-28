@@ -1,0 +1,35 @@
+	
+			<div class="container" ng-controller="groupAddCtrl">
+				<button class="button" ng-click="">Back</button><br><br>
+				<label>Name:</label><br>
+				<input type="text" ng-model="gName"><br>
+				<label>Description:</label><br>
+				<input type="text" ng-model="gDescription"><br>
+				<label>Arbitrary Attributes:</label><br>
+				<fieldset  data-ng-repeat="choice in arbitraryChoices">
+					  <input type="text" ng-model="choice.arbResource">
+					  <input type="text" ng-model="choice.arbPermission">
+					  <button class="button" ng-show="$last" ng-click="arbRemoveChoice()">-</button>
+				</fieldset>
+				<button class="button" ng-click="arbAddNewChoice()">Add fields</button>
+					   
+				<div id="manChoicesDisplay1">
+					{{ arbitraryChoices }}
+				</div>
+				<br>
+				<label>Permissions:</label><br>
+				<fieldset  data-ng-repeat="choice in choices">
+					  <select id="resDropdown" ng-model="choice.rId" ng-options="item.rId as item.rName for item in res_added" ng-change="getPermissions()" >
+					  </select>
+					  <select id="permDropdown" ng-model="choice.permission" ng-options="item for item in perm_dd">
+					  </select>
+					  <button class="remove" ng-show="$last" ng-click="removeChoice()">-</button>
+				</fieldset>
+				<button class="button" ng-click="addNewChoice()">Add fields</button>
+					   
+				<div id="choicesDisplay">
+					{{ choices }}
+				</div>
+				<br>
+				<button class="button" ng-click="">Add</button>			
+			</div>
