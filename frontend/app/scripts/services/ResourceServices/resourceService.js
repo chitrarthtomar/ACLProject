@@ -9,8 +9,12 @@ angular.module('myApp').factory('resourceService',['$http','URL','$cookies',func
           return res.data;
         });
     }
-    // resourceService.getResources = function() {
-    //     return resources;
-    // }
+    resourceService.postResource = function(resource){
+        $http
+        .post((URL.path+'/resources?token='+$cookies.get('sessionId')),resource)
+        .then(function (res){
+            alert('Successfully Added');
+        });
+    }
     return resourceService;
 }]);

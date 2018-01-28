@@ -1,9 +1,9 @@
 
 		
-			<div class="container" ng-controller="resAddCtrl">
+			<div class="container" ng-controller="resourceAddCtrl">
 				<button class="button" ng-click="">Back</button><br><br>
 				<label>Name:</label><br>
-				<input type="text" ng-model="resNameTxt"><br>
+				<input type="text" ng-model="rName"><br>
 				<label>Permissions:</label><br>
 				<fieldset  data-ng-repeat="choice in choices">
 					  <input type="text" ng-model="choice.permission">
@@ -14,8 +14,8 @@
 				<div id="choicesDisplay">
 					{{ choices }}
 				</div>
-				<button class="button" ng-click="">Add</button>
-				<button class="button" ng-click="">Clear</button>
+				<button class="button" ng-click="addResource()">Add</button>
+				<button class="button" ng-click="clearText()">Clear</button>
 
 			</div>
 				
