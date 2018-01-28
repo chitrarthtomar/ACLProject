@@ -1,3 +1,6 @@
+/**
+ * Configuration for our App containing the states to be initialised in the app
+ */
 
 angular.module('myApp').config(['$stateProvider','USER_ROLES', function( $stateProvider,USER_ROLES) {
     $stateProvider.state('loginForm',{
@@ -79,8 +82,9 @@ angular.module('myApp').config(['$stateProvider','USER_ROLES', function( $stateP
       });
   }]);
   
-  
-
+  /**
+   * Run function to prevent unauthorized and unauthenticated users from accessing the states
+   */
   angular.module('myApp').run(function ($rootScope, AUTH_EVENTS, AuthService) {
     $rootScope.$on('$stateChangeStart', function (event, next) {
       var authorizedRoles = next.data.authorizedRoles;

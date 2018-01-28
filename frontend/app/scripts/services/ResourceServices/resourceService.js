@@ -1,16 +1,16 @@
 angular.module('myApp').factory('resourceService',['$http','URL','$cookies',function($http,URL,$cookies){
     var resourceService = {};
     var resources = [];
-    resourceService.setResources = function () {
+    resourceService.getResources = function () {
         console.log(URL.path+'/resources'+'?token='+$cookies.get('sessionId'));
-        $http
+        return $http
         .get(URL.path+'/resources'+'?token='+$cookies.get('sessionId'))
-        .then(function (res) { 
-          resources =  res.data;
+        .then(function (res) {  
+          return res.data;
         });
     }
-    resourceService.getResources = function() {
-        return resources;
-    }
+    // resourceService.getResources = function() {
+    //     return resources;
+    // }
     return resourceService;
 }]);
