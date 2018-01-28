@@ -1,13 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Access Control List</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS: You can use this stylesheet to override any Bootstrap styles and/or apply your own styles -->
+    <link href="css/custom.css" rel="stylesheet">
+</head>
 
-        <form name="loginForm" ng-controller="LoginController" ng-submit="login(credentials)">
-            <label for="username">Username:</label>
-            <input type="text" name="username" ng-model="credentials.username" required>
-            <br/>
-            <label for="password">Password:</label>
-            <input type="password" name="password" ng-model="credentials.password" required>
-            <br/>
-            <!-- <span ng-show="loginForm.username.$touched && loginForm.username.$invalid">The name is required.</span> -->
-            
-        <button type="submit">Login</button>
-        </form>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="header-content-inner">
+				<form name="loginForm" ng-controller="LoginController" ng-submit="login(credentials)">
+					<label for="username">Username:</label>
+					<input type="text" name="username" ng-model="credentials.username" required>
+					<br/>
+					<label for="password">Password:</label>
+					<input type="password" name="password" ng-model="credentials.password" required>
+					<br><br>
+				<button class="btn btn-primary btn-lg" type="submit">Login</button>
+				</form>
+            </div>
+        </div>
+    </header>
+</body>
+</html>
 
