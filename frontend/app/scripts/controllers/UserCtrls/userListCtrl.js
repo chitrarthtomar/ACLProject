@@ -7,4 +7,8 @@ angular.module('myApp').controller('userListCtrl',["$state","$scope","getUsers",
 		$state.transitionTo('userInfo',{"id": id});
 	}
 	
+	$scope.addUser = function(){
+		$state.transitionTo('userAdd');
+	}
+	
 }]);	
