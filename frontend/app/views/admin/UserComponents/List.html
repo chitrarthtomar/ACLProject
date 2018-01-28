@@ -1,16 +1,13 @@
+<div ng-controller="userListCtrl" class="container">
+<h3>User List</h3>
+<p><input type="text" placeholder="Search" ng-model="user_name"></p>
+<ul class="list-group">
+	  <li ng-repeat="user in users | filter:user_name" class="list-group-item btn-default" ng-click="selectUser(user.uId)">
+		  <span>{{user.uId}}-->{{user.uName}}</span>
+	  </li>
+	</ul>
+	<br>
+	<button class="button" ng-click="addUser()">Add User</button>
+</div>        
 
-<div class="container" class="wrap" >
-		
-        <div ng-controller="userListCtrl">
-            <label>Search</label>
-            <p><input type="text" ng-model="user_name"></p>
-            <ul>
-              <li ng-repeat="user in users | filter:user_name">
-                  <input type="button" value="{{user.uName}}" ng-click="selectUser(user.uId)"/><br>
-              </li>
-            </ul>
-			<br>
-            <button class="button" ng-click="addUser()">Add User</button>
-        </div>        
-</div>
 

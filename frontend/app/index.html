@@ -11,6 +11,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="css/bootstrap.min.js"></script>
   <link rel="stylesheet" href="app.css">
   <link rel="stylesheet" href="css/adminMaster.css">
   <link rel="stylesheet" href="css/form.css">
@@ -25,11 +28,11 @@
     <li><a href="#!/view1">view1</a></li>
     <li><a href="#!/view2">view2</a></li>
   </ul> -->
-<div ng-if="!currentUser">
-  <a ui-sref="loginForm">login</a>
+<div class="pullRight" ng-if="!currentUser">
+  <button class="btn" ui-sref="loginForm">login</button>
 </div>
-<div ng-if="currentUser">
-  <a ui-sref="logout">logout</a>
+<div class="pullRight" ng-if="currentUser">
+  <button class="btn-danger" ui-sref="logout">logout</button>
 </div>
 
   <!--[if lt IE 7]>
