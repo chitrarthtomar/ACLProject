@@ -7,16 +7,13 @@ import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import controllers.GroupController;
 import dao.UserDao;
 import model.User;
+import services.GetSessionFactory;
 
 @Repository
 @Transactional
@@ -24,22 +21,13 @@ public class UserDaoImpl implements UserDao {
 	private static final Logger logger = Logger.getLogger(GroupController.class);
 	private static final String INFO_1 = "Runtime Exception occured:";
 
-	@Autowired
-	private static SessionFactory sessionFactory;
 
-	public static SessionFactory createSessionFactory() {
-		Configuration configuration = new Configuration();
-		configuration.configure();
-		ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties())
-				.buildServiceRegistry();
-		sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-		return sessionFactory;
-	}
+
 
 	// method to create user
 	public boolean createUser(String uName, String uPassword, String uRole, String uMandatoryAttributes,
-			String uArbitraryAttributes, String uResource) {
-		SessionFactory sf = createSessionFactory();
+		String uArbitraryAttributes, String uResource) {
+		SessionFactory sf = GetSessionFactory.createSessionFactory();
 		Session sess = sf.openSession();
 		try {
 			sess.getTransaction().begin();
@@ -57,7 +45,7 @@ public class UserDaoImpl implements UserDao {
 	// method to update employee
 	public boolean updateUser(int uId, String uName, String uPassword, String uRole, String uMandatoryAttributes,
 			String uArbitraryAttributes, String uResource) {
-		SessionFactory sf = createSessionFactory();
+		SessionFactory sf = GetSessionFactory.createSessionFactory();
 		Session session = sf.openSession();
 		User user = (User) session.get(User.class, uId);
 		if (user == null)
@@ -82,7 +70,7 @@ public class UserDaoImpl implements UserDao {
 
 	// method to delete employee
 	public boolean deleteUser(int uId) {
-		SessionFactory sf = createSessionFactory();
+		SessionFactory sf = GetSessionFactory.createSessionFactory();
 		Session sess = sf.openSession();
 		try {
 			sess.getTransaction().begin();
@@ -103,7 +91,7 @@ public class UserDaoImpl implements UserDao {
 	// method to return all employees
 	@SuppressWarnings("unchecked")
 	public List<User> getAllUsers() {
-		SessionFactory sf = createSessionFactory();
+		SessionFactory sf = GetSessionFactory.createSessionFactory();
 		Session sess = sf.openSession();
 		List<User> list = null;
 		try {
@@ -120,7 +108,7 @@ public class UserDaoImpl implements UserDao {
 
 	// method to return one employee of given id
 	public User getUserById(int uId) {
-		SessionFactory sf = createSessionFactory();
+		SessionFactory sf = GetSessionFactory.createSessionFactory();
 		Session sess = sf.openSession();
 		User user;
 		try {
@@ -137,7 +125,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User authUser(String name, String password) {
-		SessionFactory sf = createSessionFactory();
+		SessionFactory sf = GetSessionFactory.createSessionFactory();
 		Session sess = sf.openSession();
 		User user = null;
 		try {

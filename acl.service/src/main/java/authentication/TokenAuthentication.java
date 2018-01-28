@@ -35,7 +35,7 @@ public class TokenAuthentication {
 		if (!tokens.containsKey(token)) {
 			return false;
 		} else {
-			if (((new Date()).getTime()) - tokens.get(token) > 600000) {
+			if (((new Date()).getTime()) - tokens.get(token) > 20*60*1000) {
 				tokens.remove(token);
 				return false;
 			} else

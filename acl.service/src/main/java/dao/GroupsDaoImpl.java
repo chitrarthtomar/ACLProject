@@ -6,16 +6,13 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import controllers.GroupController;
 import model.Groups;
 import model.User;
+import services.GetSessionFactory;
 
 @Transactional
 @Repository
@@ -23,22 +20,11 @@ public class GroupsDaoImpl implements GroupsDao {
 	private static final Logger logger = Logger.getLogger(GroupController.class);
 	private static final String INFO_1 = "Runtime Exception occured:";
 
-	@Autowired
-	private static SessionFactory sessionFactory;
-
-	public static SessionFactory createSessionFactory() {
-		Configuration configuration = new Configuration();
-		configuration.configure();
-		ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties())
-				.buildServiceRegistry();
-		sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-		return sessionFactory;
-	}
 
 	@Override
 	public boolean createGroup(String gName, String gDescription, String gArbitraryAttributes, String gResource,
 			List<User> gUsers) {
-		SessionFactory sf = createSessionFactory();
+		SessionFactory sf = GetSessionFactory.createSessionFactory();
 		Session sess = sf.openSession();
 		try {
 			sess.getTransaction().begin();
@@ -58,7 +44,7 @@ public class GroupsDaoImpl implements GroupsDao {
 	@Override
 	public boolean updateGroup(int gId, String gName, String gDescription, String gArbitraryAttributes,
 			String gResource, List<User> gUsers) {
-		SessionFactory sf = createSessionFactory();
+		SessionFactory sf = GetSessionFactory.createSessionFactory();
 		Session sess = sf.openSession();
 		Groups prevGroup = (Groups) sess.get(Groups.class, gId);
 
@@ -83,7 +69,7 @@ public class GroupsDaoImpl implements GroupsDao {
 
 	@Override
 	public boolean deleteGroup(int gId) {
-		SessionFactory sf = createSessionFactory();
+		SessionFactory sf = GetSessionFactory.createSessionFactory();
 		Session sess = sf.openSession();
 		try {
 			sess.getTransaction().begin();
@@ -105,7 +91,7 @@ public class GroupsDaoImpl implements GroupsDao {
 
 	@Override
 	public Groups getById(int gId) {
-		SessionFactory sf = createSessionFactory();
+		SessionFactory sf = GetSessionFactory.createSessionFactory();
 		Session sess = sf.openSession();
 		Groups group;
 		try {
@@ -123,7 +109,7 @@ public class GroupsDaoImpl implements GroupsDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Groups> getAllGroups() {
-		SessionFactory sf = createSessionFactory();
+		SessionFactory sf = GetSessionFactory.createSessionFactory();
 		Session sess = sf.openSession();
 		List<Groups> list = null;
 		try {
@@ -140,7 +126,7 @@ public class GroupsDaoImpl implements GroupsDao {
 
 	@Override
 	public List<User> getAllUsers(int gId) {
-		SessionFactory sf = createSessionFactory();
+		SessionFactory sf = GetSessionFactory.createSessionFactory();
 		Session sess = sf.openSession();
 		List<User> list = null;
 		try {
