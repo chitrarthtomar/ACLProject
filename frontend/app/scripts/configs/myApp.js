@@ -94,6 +94,14 @@ angular.module('myApp').config(['$stateProvider','USER_ROLES', function( $stateP
             authorizedRoles : [USER_ROLES.admin, USER_ROLES.superAdmin]
         }
       });
+      $stateProvider.state('userPage',{
+        url : "/users/:id",
+        templateUrl : "./views/user/userPage.html",
+        data : {
+            authorizedRoles : [USER_ROLES.all]
+        }
+      });
+      
   }]);
   
   /**
