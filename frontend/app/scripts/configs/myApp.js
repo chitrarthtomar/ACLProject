@@ -94,7 +94,7 @@ angular.module('myApp').config(['$stateProvider','USER_ROLES', function( $stateP
             authorizedRoles : [USER_ROLES.admin, USER_ROLES.superAdmin]
         }
       });
-<<<<<<< HEAD
+
       $stateProvider.state('userAdd',{
         url : "/admin/users",
         templateUrl : "./views/admin/UserStates/UserAdd.html",
@@ -102,7 +102,7 @@ angular.module('myApp').config(['$stateProvider','USER_ROLES', function( $stateP
             authorizedRoles : [USER_ROLES.admin, USER_ROLES.superAdmin]
         }
       });
-=======
+
       $stateProvider.state('userPage',{
         url : "/users/:id",
         templateUrl : "./views/user/userPage.html",
@@ -111,7 +111,6 @@ angular.module('myApp').config(['$stateProvider','USER_ROLES', function( $stateP
         }
       });
       
->>>>>>> 6a83967ce1588fd69c6b4352247c62f09bbf9102
   }]);
   
   /**

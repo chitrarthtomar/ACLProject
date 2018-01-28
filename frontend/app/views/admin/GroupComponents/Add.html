@@ -1,6 +1,5 @@
 	
 			<div class="container" ng-controller="groupAddCtrl">
-				<button class="button" ng-click="">Back</button><br><br>
 				<label>Name:</label><br>
 				<input type="text" ng-model="gName"><br>
 				<label>Description:</label><br>
@@ -9,7 +8,7 @@
 				<fieldset  data-ng-repeat="choice in arbitraryChoices">
 					  <input type="text" ng-model="choice.attribute">
 					  <input type="text" ng-model="choice.value">
-					  <button class="button" ng-show="$last" ng-click="arbRemoveChoice()">-</button>
+					  <button class="button" ng-show="$last" ng-click="arbRemoveChoice()">-</button><br><br>
 				</fieldset>
 				<button class="button" ng-click="arbAddNewChoice()">Add Attributes</button>
 					   

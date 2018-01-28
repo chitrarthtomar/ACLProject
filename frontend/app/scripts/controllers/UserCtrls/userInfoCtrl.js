@@ -20,9 +20,7 @@ angular.module('myApp').controller('userInfoCtrl',['$scope','getUsers','$statePa
     else return true;
     },$scope.permissions) 
   });
-  // $scope.choices = [];  
-  // $scope.res_dd = ["Mobile", "Office", "Home"];
-  // $scope.perm_dd = ["Use", "Enter", "Live"];
+
   if($scope.totalResources){
   $scope.res_added = $scope.totalResources.filter(function(element){
     if(this.find(function(e){
@@ -43,6 +41,8 @@ angular.module('myApp').controller('userInfoCtrl',['$scope','getUsers','$statePa
     // },$scope.permissions);
 
     $scope.choices = [];
+    $scope.arbitraryChoices = [];
+    $scope.mandatoryChoices = [];
 
     $scope.addNewChoice = function() {
       var newItemNo = $scope.choices.length+1;
@@ -53,6 +53,26 @@ angular.module('myApp').controller('userInfoCtrl',['$scope','getUsers','$statePa
       var lastItem = $scope.choices.length-1;
       $scope.choices.splice(lastItem);
     };
+	
+  $scope.manAddNewChoice = function() {
+    var newItemNoMan = $scope.mandatoryChoices.length+1;
+    $scope.mandatoryChoices.push({});
+  };
+    
+  $scope.manRemoveChoice = function() {
+    var lastItemMan = $scope.mandatoryChoices.length-1;
+    $scope.mandatoryChoices.splice(lastItemMan);
+  };
+  
+    $scope.arbAddNewChoice = function() {
+    var newItemNoArb = $scope.arbitraryChoices.length+1;
+    $scope.arbitraryChoices.push({});
+  };
+    
+  $scope.arbRemoveChoice = function() {
+    var lastItemArb = $scope.arbitraryChoices.length-1;
+    $scope.arbitraryChoices.splice(lastItemArb);
+  };
     
   }]);
   
