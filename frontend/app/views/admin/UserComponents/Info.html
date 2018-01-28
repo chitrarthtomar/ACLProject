@@ -1,26 +1,30 @@
 
 			<div class="container" ng-controller="userInfoCtrl">
 				<label>User ID:</label>
-				<input type="text" id="userId" value="{{user.uId}}" />
+				<label value="{{user.uId}}" >{{user.uId}}</label><br><br>
 				<label>Name:</label>
-				<input type="text" id="userName" value="{{user.uName}}">
-				<label>Mandatory Attributes:</label>
+				<input type="text" id="userName" value="{{user.uName}}"><br><br>
+				<label>Mandatory Attributes:</label><br>
 				<table border="1">
+				<th>Attribute</th>
+				<th>Value</th>
 					<tr ng-repeat="(key, value) in manAttrList">
 					  <td>{{key}}</td>
-					  <td>{{value}}</td>  
+					  <td><input type="text" value="{{value}}" /></td>  
 					</tr>
 				</table>
-				<br>
-				<label>Arbitrary Attributes:</label>
+				<br><br>
+				<label>Arbitrary Attributes:</label><br>
 				<table border="1">
+				<th>Attribute</th>
+				<th>Value</th>
 					<tr ng-repeat="(key, value) in arbAttrList">
 					  <td>{{key}}</td>
-					  <td>{{value}}</td>  
+					  <td><input type="text" value="{{value}}" /></td>  
 					</tr>
 				</table>
-				<br>
-				<label>Permissions:</label>
+				<br><br>
+				<label>Permissions:</label><br>
 				<br>
 				<table border="1">
 					<tr ng-repeat="(key, value) in permissions">
@@ -37,10 +41,12 @@
 					  <button class="button" ng-show="$last" ng-click="removeChoice()">-</button>
 				</fieldset>
 				<button class="button" ng-click="addNewChoice()">Add fields</button>
-					   
+	
 				<div id="choicesDisplay">
 					{{ choices }}
 				</div>
 				
+				<button class="button" ng-click="addNewChoice()">Save</button>
+
 				
 			</div>
