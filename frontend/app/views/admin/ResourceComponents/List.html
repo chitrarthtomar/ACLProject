@@ -4,7 +4,7 @@
     <p><input type="text" ng-model="resource_name"></p>
     <ul>
       <li ng-repeat="resource in resources | filter:resource_name">
-        {{ resource }}
+        <input type="button" value="{{ resource.rName }}" ng-click="selectResource(resource.rId)"/>
       </li>
     </ul>
     <button class="button" ng-click="addResource()">Add</button>

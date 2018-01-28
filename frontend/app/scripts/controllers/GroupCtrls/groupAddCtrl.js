@@ -20,8 +20,10 @@ angular.module('myApp').controller('groupAddCtrl', function($scope,resourceServi
     console.log($scope.res_added);
     $scope.res_added.forEach(element => {
       $scope.dropDown1.push(element.rName);
-      $scope.dropDown2.push(element.rPermissions);
-    });console.log($scope.dropDown1);
+      $scope.dropDown2.push(element.rPermissions.split(","));
+    });
+    
+    console.log($scope.dropDown1);
     console.log($scope.dropDown2);
 
   });
@@ -45,16 +47,19 @@ angular.module('myApp').controller('groupAddCtrl', function($scope,resourceServi
     $scope.arbitraryChoices.push({});
   };
 
-  
+  $scope.options1 = $scope.dropDown1;
+  $scope.options2 = [];
   // $scope.show_resources = [];
-  //  $scope.getPermissions = function(){
-	//          var key = $scope.choic;
-  //       // Here you could actually go out and fetch the options for a server.
-  //       var myNewOptions = option2Options[key];
-  //       // Now set the options.
-  //       // If you got the results from a server, this would go in the callback
-  //       $scope.options2 = myNewOptions;
-  //  }
+   $scope.getPermissions = function(){
+   var key = $scope.options1.indexOf($scope.choice1);   
+
+           
+        // Here you could actually go out and fetch the options for a server.
+        var myNewOptions = $scope.dropDown2[key];
+        // Now set the options.
+        // If you got the results from a server, this would go in the callback
+        $scope.options2 = myNewOptions;
+   }
   $scope.arbRemoveChoice = function() {
     var lastItemArb = $scope.arbitraryChoices.length-1;
     $scope.arbitraryChoices.splice(lastItemArb);

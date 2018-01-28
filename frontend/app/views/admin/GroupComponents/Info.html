@@ -16,10 +16,8 @@
 				<br>
 				
 				<fieldset  data-ng-repeat="choice in choices">
-					<select id="resourceDropdown" ng-model="choice.resource" ng-options="item for item in res_dd" >
-					</select>
-					<select id="permissionDropdown" ng-model="choice.permission" ng-options="item for item in perm_dd">
-					</select>
+					<input type="text" ng-model="choice.attribute"></input>
+					<input type="text" ng-model="choice.value"></input>
 					<button class="button" ng-show="$last" ng-click="removeChoice()">-</button>
 			  </fieldset>
 			  <button class="button" ng-click="addNewChoice()">Add fields</button>

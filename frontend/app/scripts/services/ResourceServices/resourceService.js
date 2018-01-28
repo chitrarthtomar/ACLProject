@@ -16,5 +16,12 @@ angular.module('myApp').factory('resourceService',['$http','URL','$cookies',func
             alert('Successfully Added');
         });
     }
+    resourceService.getResourceById = function(id) {
+        return $http
+        .get(URL.path+'/resources/'+id+'?token='+$cookies.get('sessionId'))
+        .then(function (res) {  
+          return res.data;
+        });
+    }
     return resourceService;
 }]);

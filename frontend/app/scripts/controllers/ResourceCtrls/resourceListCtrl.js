@@ -6,4 +6,7 @@ $state) {
     $scope.addResource = function (){
         $state.transitionTo('resourceAdd');
     }
+    $scope.selectResource = function(id) {
+        $state.transitionTo('resourceInfo',{"id": id});
+    }
 }]);

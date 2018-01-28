@@ -13,7 +13,7 @@ angular.module('myApp').controller('groupInfoCtrl',['$scope','getGroups','$state
   
   resourceService.getResources().then(function(res){
     $scope.totalResources = res;
-    $scope.res_dd = $scope.totalResources.filter(function(element){
+    $scope.res_added = $scope.totalResources.filter(function(element){
       if(this.find(function(e){
         return element.id == e.id;
     })) return false;
@@ -31,6 +31,7 @@ angular.module('myApp').controller('groupInfoCtrl',['$scope','getGroups','$state
   else return true;
   },$scope.permissions) 
   }
+$scope.choices = [];
   $scope.addNewChoice = function() {
     var newItemNo = $scope.choices.length+1;
     $scope.choices.push({});
