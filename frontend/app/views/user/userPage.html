@@ -1,31 +1,39 @@
 		
-			<div ng-controller="userPageCtrl">
+			<div class="container" ng-controller="userPageCtrl">
 				User ID:
 				<label id="userId" >{{uId}}</label><br>
 				Name:
 				<label id="userName" >{{uName}}</label><br>
 				Mandatory Attributes:
 				<table border="1">
-					<tr ng-repeat="(key, value) in mandatoryAttributes">
-					  <td>{{key}}</td>
-					  <td>{{value}}</td>  
+				<th>Attribute</th>
+				<th>Value</th>
+					<tr ng-repeat="item in mandatoryAttributes">
+					  <td>{{item.attribute}}</td>
+					  <td>{{item.value}}</td>  
 					</tr>
 				</table>
 				<br>
 				Arbitrary Attributes:
 				<table border="1">
-					<tr ng-repeat="(key, value) in arbitraryAttributes">
-					  <td>{{key}}</td>
-					  <td>{{value}}</td>  
+				<th>Attribute</th>
+				<th>Value</th>
+					<tr ng-repeat="item in arbitraryAttributes">
+					  <td>{{item.attribute}}</td>
+					  <td>{{item.value}}</td>  
 					</tr>
 				</table>
 				<br>
 				Permissions:
 				<br>
 				<table border="1">
-					<tr ng-repeat="(key, value) in permissions">
-					  <td>{{key}}</td>
-					  <td>{{value}}</td>  
+				<th>ID</th>
+				<th>Name</th>
+				<th>Permission</th>
+					<tr ng-repeat="item in permissions">
+					  <td>{{item.rId}}</td>
+					  <td>{{item.rName}}</td>  
+					  <td>{{item.rPermission}}</td>
 					</tr>
 				</table>
 			</div>

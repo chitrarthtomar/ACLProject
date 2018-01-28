@@ -10,13 +10,12 @@
 
 <body>
     <header>
-        <div class="header-content">
+        <div class="header-content" ng-controller="homePageCtrl">
             <div class="header-content-inner">
-				<input type="button" value="Configure" class="btn btn-primary btn-lg">
-				<input type="button" value="Users" class="btn btn-primary btn-lg"ui-sref="adminUserList"><br><br>
-				<input type="button" value="Groups" class="btn btn-primary btn-lg"ui-sref="adminGroupList">
-				<input type="button" value="Resources" class="btn btn-primary btn-lg"ui-sref="adminResourceList"><br><br>
-				<input type="button" value="Get Information" class="btn btn-primary btn-lg">
+				<input type="button" value="Users" class="btn btn-primary btn-lg" ui-sref="adminUserList">
+				<input type="button" value="Groups" class="btn btn-primary btn-lg" ui-sref="adminGroupList"><br><br>
+				<input type="button" value="Resources" class="btn btn-primary btn-lg" ui-sref="adminResourceList">
+				<input type="button" value="Get Information" class="btn btn-primary btn-lg" ng-click="getSelfInfo()">
             </div>
         </div>
     </header>
