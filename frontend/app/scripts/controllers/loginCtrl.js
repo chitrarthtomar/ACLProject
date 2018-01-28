@@ -9,7 +9,10 @@ angular.module('myApp').controller('LoginController', function ($scope,$state, $
       AuthService.login(credentials).then(function (data) {
         $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
         $scope.setCurrentUser(data);
-        $state.transitionTo('adminWelcome');
+        if(data.user.uRole == 'admin')
+          $state.transitionTo('adminWelcome');
+        else if(data.user.uRole == 'user')
+          $state.transitionTo('userPage',{"id":data.user.uId});
       }, function () {
         alert("Wrong usrname/password");
         $rootScope.$broadcast(AUTH_EVENTS.loginFailed);

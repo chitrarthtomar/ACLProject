@@ -11,6 +11,7 @@ angular.module('myApp').factory('getUsers',['$http','URL','$cookies',function($h
         return $http
         .get(URL.path+'/users/'+id+'?token='+$cookies.get('sessionId'))
         .then(function (res){
+            console.log(res);
             return res.data;
         });
     }
