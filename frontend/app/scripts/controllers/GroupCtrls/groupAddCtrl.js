@@ -1,5 +1,5 @@
 
-angular.module('myApp').controller('groupAddCtrl', function($scope,resourceService) {
+angular.module('myApp').controller('groupAddCtrl', function($scope,resourceService,getUsers) {
   
   $scope.arbitraryChoices = [];
   
@@ -22,12 +22,15 @@ angular.module('myApp').controller('groupAddCtrl', function($scope,resourceServi
       $scope.dropDown1.push(element.rName);
       $scope.dropDown2.push(element.rPermissions.split(","));
     });
-    
+    getUsers.getList().then(function(users){
+      $scope.allUsers = users;
+      console.log($scope.allUsers);
+    })
     console.log($scope.dropDown1);
     console.log($scope.dropDown2);
 
   });
-  
+  $scope.userChoices = [];
  if($scope.totalResources){
   $scope.res_added = $scope.totalResources.filter(function(element){
     if(this.find(function(e){
@@ -74,5 +77,24 @@ angular.module('myApp').controller('groupAddCtrl', function($scope,resourceServi
     var lastItem = $scope.choices.length-1;
     $scope.choices.splice(lastItem);
   };
+  $scope.userAddNewChoice = function() {
+    var newItemNo = $scope.userChoices.length+1;
+    $scope.userChoices.push({});
+  };
+    
+  $scope.userRemoveChoice = function() {
+    var lastItem = $scope.userChoices.length-1;
+    $scope.userChoices.splice(lastItem);
+  };
+  $scope.userDetails=[];
+  $scope.addGroup= function(){
+
+    $scope.userChoices.forEach(element => {
+      userService.getUserById(element.user).then(function(user){
+        userDetails.push(user);
+      })
+    });
+    console.log(userDetails);
+  }
   
 });

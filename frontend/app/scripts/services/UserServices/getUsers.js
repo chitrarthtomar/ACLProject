@@ -1,4 +1,4 @@
-angular.module('myApp').factory('getUsers',['$http','URL',function($http,URL,$cookies){
+angular.module('myApp').factory('getUsers',['$http','URL','$cookies',function($http,URL,$cookies){
     var userService = {};
     userService.getList = function () {
         return $http
