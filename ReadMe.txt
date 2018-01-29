@@ -1,5 +1,5 @@
 STEPS TO PROCEED:
-
+0) Run the application on Java version 1.8
 1) Create a database with name as "acldatabase"
 2) Populate the database with the dump file provided
 3) Go to frontend -> app and run npm start in the command prompt
