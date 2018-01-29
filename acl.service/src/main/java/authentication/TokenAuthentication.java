@@ -5,9 +5,10 @@ import java.util.Date;
 import java.util.HashMap;
 
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 
 import controllers.GroupController;
-
+@Component
 public class TokenAuthentication {
 	private static HashMap<String, Long> tokens = new HashMap<>();
 	private static HashMap<String, String> userAuthorization = new HashMap<>();

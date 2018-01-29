@@ -29,9 +29,9 @@ public class CORSFilter implements Filter {
 		}
 	}
 
-	public void init(FilterConfig filterConfig) {
+	public void init(FilterConfig filterConfig) {//some empty function
 	}
 
-	public void destroy() {
+	public void destroy() {//some empty function
 	}
 }

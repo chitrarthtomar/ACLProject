@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -109,7 +110,7 @@ public class ResourceDaoImpl implements ResourceDao {
 		} catch (RuntimeException e) {
 			session.getTransaction().rollback();
 			logger.info(INFO_1 + e.getMessage());
-			return null;
+			return new ArrayList<>();
 		}
 		return list;
 	}

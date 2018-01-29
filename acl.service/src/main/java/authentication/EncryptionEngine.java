@@ -3,7 +3,9 @@ package authentication;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 
+@Component
 public class EncryptionEngine {
 	private static final Logger logger = Logger.getLogger(EncryptionEngine.class);
 

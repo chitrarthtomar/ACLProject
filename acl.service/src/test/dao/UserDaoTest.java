@@ -5,8 +5,6 @@ import static org.junit.Assert.*;
 import java.util.List;
 
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import model.User;
 
 public class UserDaoTest {
@@ -36,7 +34,7 @@ public class UserDaoTest {
 	}
 	
 	@Test
-	public void is__updating_User_Working () throws Exception{
+	public void is_updating_User_Working () throws Exception{
 		boolean test = userDao.createUser("abc", "Hello", "admin", "test", "asd", "asd");
 		assertEquals(true, test);
 		int uId = userDao.authUser("abc", "Hello").getuId();
@@ -44,6 +42,7 @@ public class UserDaoTest {
 		assertEquals(true ,isupdating );
 		User user = userDao.getUserById(uId);
 		boolean actual = userDao.deleteUser(uId);
+		assertEquals(true,actual);
 		assertEquals("hey",user.getuPassword());
 	}
 	

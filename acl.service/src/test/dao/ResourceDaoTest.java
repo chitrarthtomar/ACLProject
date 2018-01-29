@@ -8,7 +8,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import model.Groups;
 import model.Resource;
 
 public class ResourceDaoTest {
