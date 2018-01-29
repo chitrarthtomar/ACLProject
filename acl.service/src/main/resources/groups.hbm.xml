@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>  
+<!DOCTYPE hibernate-mapping PUBLIC  
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
+  
+<hibernate-mapping>  
+<class name="model.Groups" table="Groups">  
+          <id name="gId">  
+          <generator class="assigned"></generator>  
+          </id>  
+            
+          <property name="gName"></property>  
+          <property name="gDescription"></property>
+          <property name="gArbitraryAttributes"> </property>
+          <property name="gResource"></property>
+</class>  
+            
+</hibernate-mapping> 
