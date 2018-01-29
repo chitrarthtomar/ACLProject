@@ -84,7 +84,7 @@ public class MvcController {
 	public List<UserListDto> users(@RequestParam(value = "token", required = true) String token) {
 		if (!tokenauth.checkToken(token) || !tokenauth.checkAdmin(token)) {
 			logger.warn(INFO_1);
-			return null;
+			return new ArrayList<>();
 		}
 		List<User> users = userService.getAllUsers();
 		List<UserListDto> userList = new ArrayList<>();
