@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Access Control List</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="css/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="css/adminMaster.css">
+  <link rel="stylesheet" href="css/form.css">
+  <link rel="stylesheet" href="css/navCss.css">
+
+
+  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+
+</head>
+<body ng-controller="ApplicationController">
+  <!-- <ul class="menu">
+    <li><a href="#!/view1">view1</a></li>
+    <li><a href="#!/view2">view2</a></li>
+  </ul> -->
+<div class="pullRight" ng-if="!currentUser">
+  <button class="btn" ui-sref="loginForm">login</button>
+</div>
+<div class="pullRight" ng-if="currentUser">
+  <button class="btn-danger" ui-sref="logout">logout</button>
+</div>
+
+  <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+  <div ng-include="Groups.html"></div>
+ <div ui-view></div>
+
+  <!-- <div>Angular seed app: v<span app-version></span></div> --> 
+
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+  -->
+
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+  <script src="bower_components/ng-cookies/dist/ng-cookies.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="app.js"></script>
+  <script src="scripts/controllers/loginCtrl.js"></script>
+  <script src="scripts/controllers/logoutCtrl.js"></script>
+  <script src="scripts/controllers/profileCtrl.js"></script>
+  <script src="scripts/controllers/applicationCtrl.js"></script>
+  <script src="scripts/controllers/UserPageCtrl.js"></script>
+  <script src="scripts/controllers/GroupCtrls/groupListCtrl.js"></script>
+  <script src="scripts/controllers/GroupCtrls/groupInfoCtrl.js"></script>
+  <script src="scripts/controllers/GroupCtrls/groupAddCtrl.js"></script>
+  <script src="scripts/controllers/UserCtrls/userListCtrl.js"></script>
+  <script src="scripts/controllers/ResourceCtrls/resourceListCtrl.js"></script>
+  <script src="scripts/controllers/ResourceCtrls/resourceAddCtrl.js"></script>
+  <script src="scripts/controllers/ResourceCtrls/resourceInfoCtrl.js"></script>
+  <script src="scripts/controllers/UserCtrls/userInfoCtrl.js"></script>
+  <script src="scripts/controllers/adminUserAdd.js"></script>
+  <script src="scripts/controllers/adminGroupInfoUsers.js"></script>
+  <script src="scripts/controllers/resourceAdd.js"></script>
+  <script src="scripts/controllers/resourceInfo.js"></script>
+  <script src="scripts/controllers/resource.js"></script>
+  <script src="scripts/controllers/homePageCtrl.js"></script>
+  <script src="scripts/services/AuthService.js"></script>
+  <script src="scripts/services/Session.js"></script>
+  <script src="scripts/services/GroupServices/getGroups.js"></script>
+  <script src="scripts/services/GroupServices/postGroup.js"></script>
+  <script src="scripts/services/GroupServices/putGroup.js"></script>
+  <script src="scripts/services/UserServices/getUsers.js"></script>
+  <script src="scripts/services/ResourceServices/resourceService.js"></script>
+  <script src="scripts/constants/AuthEvents.js"></script>
+  <script src="scripts/constants/UserRoles.js"></script>
+  <script src="scripts/constants/Url.js"></script>
+  <script src="scripts/configs/myApp.js"></script>
+  <script src="scripts/directives/loginDialog.js"></script>
+  <script src="components/version/version.js"></script>
+  <script src="components/version/version-directive.js"></script>
+  <script src="components/version/interpolate-filter.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+  <div login-dialog ng-if="!isLoginPage"></div>
+</body>
+</html>

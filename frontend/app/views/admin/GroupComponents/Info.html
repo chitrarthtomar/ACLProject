@@ -1,0 +1,73 @@
+<div class="container" ng-controller="groupInfoCtrl">
+	<label>Name:</label>
+	<input id="userName" type="text" value="{{group.gName}}"/ ><br>
+	<label>Description:</label><br>
+	<input id="description" type="textarea" value="{{group.gDescription}}"/><br>
+
+	<label>Arbitrary Attributes:</label>
+	<table border="1">
+		<tr ng-repeat="item in arbAttrList">
+		  <td>{{item.attribute}}</td>
+		  <td><input type="text" value="{{item.value}}" /></td>  
+		</tr>
+	</table>
+	<br>
+	
+	<fieldset  data-ng-repeat="choice in choices">
+		<input type="text" ng-model="choice.attribute"></input>
+		<input type="text" ng-model="choice.value"></input>
+		<button class="button" ng-show="$last" ng-click="removeChoice()">-</button>
+  </fieldset>
+  <button class="button" ng-click="addNewChoice()">Add fields</button>
+	<div id="choicesDisplay1">
+		{{ choices }}
+	</div>
+  <br><br>
+	<label>Permissions:</label>
+	<br>
+	<table border="1">
+		<tr ng-repeat="item in permissions">
+		  <td>{{item.rId}}</td>
+		  <td>{{item.rName}}</td> 
+		  <td>{{item.rPermission}}</td> 
+		</tr>
+	</table>
+	
+	<fieldset  data-ng-repeat="choice in resChoices">
+		  <select id="resourceDropdown" ng-model="choice.resource" ng-options="item for item in res_dd" ng-change="update(choice.resource)" >
+		  </select>
+		  <select id="permissionDropdown" ng-model="choice.permission" ng-options="item for item in perm_dd">
+		  </select>
+		  <button class="button" ng-show="$last" ng-click="removeChoice2()">-</button>
+	</fieldset>
+	<button class="button" ng-click="addNewChoice2()">Add fields</button>					   
+	<div id="choicesDisplay">
+		{{ resChoices }}
+	<br><br>
+	</div>
+    <label>The users in the group are:</label>
+    <table border="1">
+        <tr ng-repeat="value in groupUsers">
+          <td>{{value.uId}}</td>
+          <td>{{value.uName}}</td>  
+        </tr>
+    </table>
+    <br>
+    <label>Add users:</label><br>
+    <fieldset  data-ng-repeat="choice in userChoices">
+          <select id="userDropdown" ng-model="choice.user" ng-options="item for item in user_dd" >
+          </select>
+          <button class="button" ng-show="$last" ng-click="removeChoice3()">-</button>
+    </fieldset>
+    <button class="button" ng-click="addNewChoice3()">Add fields</button>
+           
+    <div id="userChoicesDisplay">
+        {{ userChoices }}
+    </div>
+    <br>
+    <button class="button" ng-click="putGroupm()">Save</button><br><br>
+	
+</div>
+		
+
+

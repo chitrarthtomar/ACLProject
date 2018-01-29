@@ -1,0 +1,19 @@
+<div class="container" ng-controller="resourceAddCtrl">
+	<label>Name:</label><br>
+	<input type="text" ng-model="rName"><br>
+	<label>Permissions:</label><br>
+	<fieldset  data-ng-repeat="choice in choices">
+		  <input type="text" ng-model="choice.permission">
+		  <button class="remove" ng-show="$last" ng-click="removeChoice()">-</button>
+	</fieldset>
+	<button class="button" ng-click="addNewChoice()">+</button>
+		   
+	<div id="choicesDisplay">
+		{{ choices }}
+	</div>
+	<button class="button" ng-click="addResource()">Add</button>
+	<button class="button" ng-click="clearText()">Clear</button>
+
+</div>
+				
+

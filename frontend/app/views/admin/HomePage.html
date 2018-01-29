@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Access Control List</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS: You can use this stylesheet to override any Bootstrap styles and/or apply your own styles -->
+    <link href="css/custom.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="header-content" ng-controller="homePageCtrl">
+            <div class="header-content-inner">
+				<input type="button" value="Users" class="btn btn-primary btn-lg" ui-sref="adminUserList">
+				<input type="button" value="Groups" class="btn btn-primary btn-lg" ui-sref="adminGroupList"><br><br>
+				<input type="button" value="Resources" class="btn btn-primary btn-lg" ui-sref="adminResourceList">
+				<input type="button" value="Get Information" class="btn btn-primary btn-lg" ng-click="getSelfInfo()">
+            </div>
+        </div>
+    </header>
+</body>
+</html>

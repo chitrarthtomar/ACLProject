@@ -1,0 +1,12 @@
+<div ng-controller="userListCtrl" class="container">
+<h3>User List</h3>
+<p><input type="text" placeholder="Search" ng-model="user_name"></p>
+<ul class="list-group">
+	  <li ng-repeat="user in users | filter:user_name" class="list-group-item btn-default" ng-click="selectUser(user.uId)">
+		  <span>{{user.uId}}-->{{user.uName}}</span>
+	  </li>
+	</ul>
+	<br>
+	<button class="button" ng-click="addUser()">Add User</button>
+</div>        
+

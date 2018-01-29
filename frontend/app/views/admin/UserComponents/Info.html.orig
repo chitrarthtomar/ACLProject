@@ -1,0 +1,45 @@
+<div class="container" ng-controller="userInfoCtrl">
+	<label>User ID:</label>
+	<label value="{{user.uId}}" >{{user.uId}}</label><br><br>
+	<label>Name:</label>
+	<input type="text" id="userName" value="{{user.uName}}"><br><br>
+	<label>Mandatory Attributes:</label><br>
+	<table border="1">
+	<th>Attribute</th>
+	<th>Value</th>
+		<tr ng-repeat="item in manAttrList">
+		  <td>{{item.attribute}}</td>
+		  <td><input type="text" value="{{item.value}}" /></td>  
+		</tr>
+	</table>
+	<br><br>
+	<label>Arbitrary Attributes:</label><br>
+	<table border="1">
+	<th>Attribute</th>
+	<th>Value</th>
+		<tr ng-repeat="item in arbAttrList">
+		  <td>{{item.attribute}}</td>
+		  <td><input type="text" value="{{item.value}}" /></td>  
+		</tr>
+	</table>
+	<br><br>
+	<label>Permissions:</label><br>
+	<br>
+	<table border="1">
+		<tr ng-repeat="item in permissions">
+		  <td>{{item.rId}}</td>
+		  <td>{{item.rName}}</td> 
+		  <td><input type="text" value="{{item.rPermission}}"></td> 
+		</tr>
+	</table>
+	
+	<!-- <fieldset  data-ng-repeat="choice in choices"> -->
+		  <!-- <select id="resourceDropdown" ng-model="choice.resource" ng-options="item for item in res_dd" > -->
+		  <!-- </select> -->
+		  <!-- <select id="permissionDropdown" ng-model="choice.permission" ng-options="item for item in perm_dd"> -->
+		  <!-- </select> -->
+		  <!-- <button class="button" ng-show="$last" ng-click="removeChoice()">-</button> -->
+	<!-- </fieldset> -->
+	<button class="button" ng-click="saveChanges()">Save</button>
+	
+</div>

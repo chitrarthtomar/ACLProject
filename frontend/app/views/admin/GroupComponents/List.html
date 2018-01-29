@@ -1,0 +1,10 @@
+<div ng-controller="groupsListCtrl" class="container">
+	<h3>Group List</h3>
+	<p><input type="text" placeholder="Search" ng-model="group_name"></p>
+	<ul class="list-group">
+		<li ng-repeat="group in groups | filter:group_name" class="list-group-item btn-default" ng-click="selectGroup(group.gId)">
+				<span>{{group.gName}}</span>
+		</li>
+	</ul>
+	<button class="button" ng-click="addGroup()">Add</button>
+</div>

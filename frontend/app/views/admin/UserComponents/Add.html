@@ -1,0 +1,33 @@
+
+			<div class="container" ng-controller="userAddCtrl">
+				<label>Name:</label><br>
+				<input type="text" ng-model="userNameTxt"><br>
+				<label>Password:</label><br>
+				<input type="password" ng-model="userPasswordTxt"><br>
+				<label>Arbitrary Attributes:</label><br>
+				<fieldset  data-ng-repeat="choice in arbitraryChoices">
+					  <input ng-model="choice.arbitraryAttributes"></input>
+					  <input ng-model="choice.arbitraryValues"></input>
+					  <button class="button" ng-show="$last" ng-click="arbRemoveChoice()">-</button>
+				</fieldset>
+				<button class="button" ng-click="arbAddNewChoice()">Add fields</button>
+					   
+				<div id="manChoicesDisplay1">
+					{{ arbitraryChoices }}
+				</div>
+				<br>
+				<label>Mandatory Attributes:</label><br>
+				<fieldset  data-ng-repeat="choice in mandatoryChoices">
+					  <input ng-model="choice.mandatoryAttributes"></input>
+					  <input ng-model="choice.mandatoryValues"></input>
+					  <button class="button" ng-show="$last" ng-click="manRemoveChoice()">-</button>
+				</fieldset>
+				<button class="button" ng-click="manAddNewChoice()">Add fields</button>
+					   
+				<div id="manChoicesDisplay">
+					{{ mandatoryChoices }}
+				</div>
+				<br>
+				<button class="button" ng-click="">Save</button><br><br>
+			
+			</div>

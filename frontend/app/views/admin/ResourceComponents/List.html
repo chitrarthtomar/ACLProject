@@ -1,0 +1,10 @@
+<div class="container" ng-controller="resourceListCtrl">
+    <h3>Resource List</h3>
+		<p><input type="text" placeholder="Search" ng-model="resource_name"></p>
+    <ul class="list-group">
+      <li ng-repeat="resource in resources | filter:resource_name" class="list-group-item btn-default" ng-click="selectResource(resource.rId)">
+		<span>{{resource.rId}}-->{{resource.rName}}</span>
+      </li>
+    </ul>
+    <button class="button" ng-click="addResource()">Add</button>
+</div>
