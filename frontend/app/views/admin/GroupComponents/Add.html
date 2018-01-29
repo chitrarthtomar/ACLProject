@@ -1,34 +1,50 @@
+
+<div class="container" ng-controller="groupAddCtrl">
+	<label>Name:</label><br>
+	<input type="text" ng-model="gName"><br>
+	<label>Description:</label><br>
+	<input type="text" ng-model="gDescription"><br>
+	<label>Arbitrary Attributes:</label><br>
+	<fieldset  data-ng-repeat="choice in arbitraryChoices">
+		  <input type="text" ng-model="choice.attribute">
+		  <input type="text" ng-model="choice.value">
+		  <button class="button" ng-show="$last" ng-click="arbRemoveChoice()">-</button>
+	</fieldset>
+	<button class="button" ng-click="arbAddNewChoice()">Add Attributes</button>
+		   
+	<div id="manChoicesDisplay1">
+		{{ arbitraryChoices }}
+	</div>
+	<br>
+	<label>Permissions:</label><br>
+	<fieldset  data-ng-repeat="choice in choices">
+		  <select id="resDropdown" ng-model="choice.rName" ng-options="item for item in dropDown1" ng-change="update(choice.rName)" >
+		  </select>
+		  <select id="permDropdown" ng-model="choice.rPermission" ng-options="item for item in dropDown2">
+		  </select>
+		  <button class="remove" ng-show="$last" ng-click="removeChoice()">-</button>
+	</fieldset>
+	<button class="button" ng-click="addNewChoice()">Add fields</button>
+		   
+	<div id="choicesDisplay">
+		{{ choices }}
+	</div>
+	<br>
 	
-			<div class="container" ng-controller="groupAddCtrl">
-				<label>Name:</label><br>
-				<input type="text" ng-model="gName"><br>
-				<label>Description:</label><br>
-				<input type="text" ng-model="gDescription"><br>
-				<label>Arbitrary Attributes:</label><br>
-				<fieldset  data-ng-repeat="choice in arbitraryChoices">
-					  <input type="text" ng-model="choice.attribute">
-					  <input type="text" ng-model="choice.value">
-					  <button class="button" ng-show="$last" ng-click="arbRemoveChoice()">-</button><br><br>
-				</fieldset>
-				<button class="button" ng-click="arbAddNewChoice()">Add Attributes</button>
-					   
-				<div id="manChoicesDisplay1">
-					{{ arbitraryChoices }}
-				</div>
-				<br>
-				<label>Permissions:</label><br>
-				<fieldset  data-ng-repeat="choice in choices">
-					  <select id="resDropdown" ng-model="choice.rName" ng-options="item for item in dropDown1"  >
-					  </select>
-					  <select id="permDropdown" ng-model="choice.rPermission" ng-options="item for item in dropDown2">
-					  </select>
-					  <button class="remove" ng-show="$last" ng-click="removeChoice()">-</button>
-				</fieldset>
-				<button class="button" ng-click="addNewChoice()">Add fields</button>
-					   
-				<div id="choicesDisplay">
-					{{ choices }}
-				</div>
-				<br>
-				<button class="button" ng-click="">Add</button>			
-			</div>
+	
+	<label>Add users:</label><br>
+    <fieldset  data-ng-repeat="choice in userChoices">
+          <select id="userDropdown" ng-model="choice.id" ng-options="item for item in allUsers" >
+          </select>
+          <button class="button" ng-show="$last" ng-click="removeChoice3()">-</button>
+    </fieldset>
+    <button class="button" ng-click="addNewChoice3()">Add fields</button>
+        
+    <div id="userChoicesDisplay">
+        {{ userChoices }}
+    </div>
+	<br>
+	<button class="button" ng-click="postGroup()">Save</button>			
+</div>
+
+

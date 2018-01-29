@@ -1,12 +1,12 @@
 <div class="container" ng-controller="groupAddCtrl">
 <label>Add users:</label><br>
     <fieldset  data-ng-repeat="choice in userChoices">
-          <select id="userDropdown" ng-model="choice.user" ng-options="item.uId as item.uName for item in allUsers" >
+          <select id="userDropdown" ng-model="choice.id" ng-options="item for item in allUsers" >
           </select>
-          <button class="button" ng-show="$last" ng-click="userRemoveChoice()">-</button>
+          <button class="button" ng-show="$last" ng-click="removeChoice3()">-</button>
     </fieldset>
-    <button class="button" ng-click="userAddNewChoice()">Add fields</button>
-           
+    <button class="button" ng-click="addNewChoice3()">Add fields</button>
+        
     <div id="userChoicesDisplay">
         {{ userChoices }}
     </div>

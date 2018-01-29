@@ -1,8 +1,8 @@
 <div class="container" ng-controller="groupInfoCtrl">
     <label>The users in the group are:</label>
     <table border="1">
-        <tr ng-repeat="value in users">
-          <td>User</td>
+        <tr ng-repeat="value in groupUsers">
+          <td>{{value.uId}}</td>
           <td>{{value.uName}}</td>  
         </tr>
     </table>
@@ -11,9 +11,9 @@
     <fieldset  data-ng-repeat="choice in userChoices">
           <select id="userDropdown" ng-model="choice.user" ng-options="item for item in user_dd" >
           </select>
-          <button class="button" ng-show="$last" ng-click="userRemoveChoice()">-</button>
+          <button class="button" ng-show="$last" ng-click="removeChoice3()">-</button>
     </fieldset>
-    <button class="button" ng-click="userAddNewChoice()">Add fields</button>
+    <button class="button" ng-click="addNewChoice3()">Add fields</button>
            
     <div id="userChoicesDisplay">
         {{ userChoices }}
