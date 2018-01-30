@@ -83,7 +83,7 @@ $scope.choices = [];
 	
     $scope.totalResources.forEach(element => {
 	  if( element.rId == item.substr(0,item.indexOf(':')))
-		$scope.perm_dd.push(element.rPermissions.split(","));
+		$scope.perm_dd.push(element.rPermission.split(","));
 	  // if( $.inArray(item.substr(0,item.indexOf(':')),$scope.permissions) == -1){
 		  // $scope.dropDown2.push(element.rId + ':' + element.rName);
 		  // console.log('not there');
@@ -110,12 +110,12 @@ $scope.choices = [];
 		   
 		});
 		putDto = function (){
-			groupDto.gName = $scope.gName;
-			groupDto.gDescription = $scope.gDescription;
+			groupDto.gName = $scope.group.gName;
+			groupDto.gDescription = $scope.group.gDescription;
 			groupDto.gArbitraryAttributes = JSON.stringify($scope.arbitraryChoices);
-			groupDto.gResource = JSON.stringify($scope.choices);
+			groupDto.gResource = JSON.stringify($scope.resChoices);
 			groupDto.gUsers = ($scope.users);
-			putGroup.put(groupDto);
+			putGroup.put(groupDto,$scope.group.gId);
 		}
 		setTimeout(putDto,2000);
 	

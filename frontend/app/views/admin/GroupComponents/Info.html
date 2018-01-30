@@ -1,14 +1,15 @@
 <div class="container" ng-controller="groupInfoCtrl">
+		<form class="panel-body" ng-submit="putGroup()">
 	<label>Name:</label>
-	<input id="userName" type="text" value="{{group.gName}}"/ ><br>
+	<input id="userName" type="text" value="{{group.gName}}" ng-model="group.gName"/  ><br>
 	<label>Description:</label><br>
-	<input id="description" type="textarea" value="{{group.gDescription}}"/><br>
+	<input id="description" type="textarea" value="{{group.gDescription}}" ng-model="group.gDescription"/><br>
 
 	<label>Arbitrary Attributes:</label>
 	<table border="1">
 		<tr ng-repeat="item in arbAttrList">
 		  <td>{{item.attribute}}</td>
-		  <td><input type="text" value="{{item.value}}" /></td>  
+		  <td><input type="text" value="{{item.value}}" type="button"/></td>  
 		</tr>
 	</table>
 	<br>
@@ -16,7 +17,7 @@
 	<fieldset  data-ng-repeat="choice in choices">
 		<input type="text" ng-model="choice.attribute"></input>
 		<input type="text" ng-model="choice.value"></input>
-		<button class="button" ng-show="$last" ng-click="removeChoice()">-</button>
+		<button class="button" ng-show="$last" type="button" ng-click="removeChoice()">-</button>
   </fieldset>
   <button class="button" ng-click="addNewChoice()">Add fields</button>
 	<div id="choicesDisplay1">
@@ -38,9 +39,9 @@
 		  </select>
 		  <select id="permissionDropdown" ng-model="choice.permission" ng-options="item for item in perm_dd">
 		  </select>
-		  <button class="button" ng-show="$last" ng-click="removeChoice2()">-</button>
+		  <button class="button" ng-show="$last" type="button" ng-click="removeChoice2()">-</button>
 	</fieldset>
-	<button class="button" ng-click="addNewChoice2()">Add fields</button>					   
+	<button class="button" type="button" ng-click="addNewChoice2()">Add fields</button>					   
 	<div id="choicesDisplay">
 		{{ resChoices }}
 	<br><br>
@@ -57,15 +58,15 @@
     <fieldset  data-ng-repeat="choice in userChoices">
           <select id="userDropdown" ng-model="choice.user" ng-options="item for item in user_dd" >
           </select>
-          <button class="button" ng-show="$last" ng-click="removeChoice3()">-</button>
+          <button class="button" type="button" ng-show="$last" ng-click="removeChoice3()">-</button>
     </fieldset>
-    <button class="button" ng-click="addNewChoice3()">Add fields</button>
+    <button class="button" type="button" ng-click="addNewChoice3()">Add fields</button>
            
     <div id="userChoicesDisplay">
         {{ userChoices }}
     </div>
     <br>
-    <button class="button" ng-click="putGroupm()">Save</button><br><br>
+    <button class="button" type="submit" ng-click="putGroupm()">Save</button><br><br>
 	
 </div>
 		

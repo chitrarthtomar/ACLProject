@@ -1,20 +1,20 @@
 
 <div class="container" ng-controller="groupAddCtrl">
+	<form class="panel-body" ng-submit="postGroup()">
 	<label>Name:</label><br>
-	<input type="text" ng-model="gName"><br>
+
+	<input type="text" ng-model="groupName" required=""/><br>
 	<label>Description:</label><br>
-	<input type="text" ng-model="gDescription"><br>
+	<input type="text" ng-model="groupDescription" required=""><br>
+
 	<label>Arbitrary Attributes:</label><br>
 	<fieldset  data-ng-repeat="choice in arbitraryChoices">
-		  <input type="text" ng-model="choice.attribute">
-		  <input type="text" ng-model="choice.value">
+		  <input type="text" ng-model="choice.attribute" required="">
+		  <input type="text" ng-model="choice.value" required="">
 		  <button class="button" ng-show="$last" ng-click="arbRemoveChoice()">-</button>
 	</fieldset>
-	<button class="button" ng-click="arbAddNewChoice()">Add Attributes</button>
-		   
-	<div id="manChoicesDisplay1">
-		{{ arbitraryChoices }}
-	</div>
+	<button class="button" type="button" ng-click="arbAddNewChoice()">Add Attributes</button>
+		
 	<br>
 	<label>Permissions:</label><br>
 	<fieldset  data-ng-repeat="choice in choices">
@@ -24,11 +24,8 @@
 		  </select>
 		  <button class="remove" ng-show="$last" ng-click="removeChoice()">-</button>
 	</fieldset>
-	<button class="button" ng-click="addNewChoice()">Add fields</button>
-		   
-	<div id="choicesDisplay">
-		{{ choices }}
-	</div>
+	<button class="button" type="button" ng-click="addNewChoice()">Add fields</button>
+		  
 	<br>
 	
 	
@@ -38,13 +35,11 @@
           </select>
           <button class="button" ng-show="$last" ng-click="removeChoice3()">-</button>
     </fieldset>
-    <button class="button" ng-click="addNewChoice3()">Add fields</button>
+    <button class="button" type="button" ng-click="addNewChoice3()">Add fields</button>
         
-    <div id="userChoicesDisplay">
-        {{ userChoices }}
-    </div>
 	<br>
-	<button class="button" ng-click="postGroup()">Save</button>			
+	<button class="button" type="submit">Save</button>
+	</form>			
 </div>
 
 

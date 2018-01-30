@@ -5,7 +5,7 @@ angular.module('myApp').factory('postGroup',['$http','URL','$cookies',function($
         return $http
         .post((URL.path+'/groups'+'?token='+$cookies.get('sessionId')),dto)
         .then(function (res) { 
-          alert("success");
+          alert("added group :)");
         });
     }
     return grpService;
