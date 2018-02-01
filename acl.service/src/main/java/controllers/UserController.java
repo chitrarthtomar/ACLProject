@@ -21,21 +21,22 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
-	TokenAuthentication tokenauth = new TokenAuthentication();
-	EncryptionEngine encryptionEngine = new EncryptionEngine();
-	String s = "success";
-	String f = "failed";
+	@Autowired
+	TokenAuthentication tokenauth;
+	@Autowired
+	EncryptionEngine encryptionEngine;
+
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String create(@RequestParam(value = "token", required = true) String token, @RequestBody User user) {
+	public void create(@RequestParam(value = "token", required = true) String token, @RequestBody User user) {
 		if (!tokenauth.checkToken(token) || !tokenauth.checkAdmin(token)) {
 			logger.warn(INFO_1);
-			return f;
+			return;
 		}
 		userService.createUser(user.getuName(), encryptionEngine.encryptWithMD5(user.getuPassword()), user.getuRole(),
 				user.getuMandatoryAttributes(), user.getuArbitraryAttributes(), user.getuResource());
 		logger.info("Created user: " + user.getuName());
-		return s;
+		return;
 	}
 
 	@RequestMapping(value = "/{uId}", method = RequestMethod.GET, produces = "application/json")
@@ -49,26 +50,26 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/{uId}", method = RequestMethod.DELETE)
-	public String delete(@RequestParam(value = "token", required = true) String token, @PathVariable int uId) {
+	public void delete(@RequestParam(value = "token", required = true) String token, @PathVariable int uId) {
 		if (!tokenauth.checkToken(token) || !tokenauth.checkAdmin(token)) {
 			logger.warn(INFO_1);
-			return f;
+			return;
 		}
 		userService.deleteUser(uId);
 		logger.info("Deleted user with ID: " + uId);
-		return s;
+		return;
 	}
 
 	@RequestMapping(value = "/{uId}", method = RequestMethod.PUT)
-	public String update(@RequestParam(value = "token", required = true) String token, @RequestBody User user,
+	public void update(@RequestParam(value = "token", required = true) String token, @RequestBody User user,
 			@PathVariable int uId) {
 		if (!tokenauth.checkToken(token) || !tokenauth.checkAdmin(token)) {
 			logger.warn(INFO_1);
-			return f;
+			return;
 		}
 		userService.updateUser(uId, user.getuName(), encryptionEngine.encryptWithMD5(user.getuPassword()),
 				user.getuRole(), user.getuMandatoryAttributes(), user.getuArbitraryAttributes(), user.getuResource());
 		logger.info("Updated user with ID: " + uId);
-		return s;
+		return;
 	}
 }

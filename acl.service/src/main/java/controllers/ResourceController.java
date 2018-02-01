@@ -20,7 +20,8 @@ public class ResourceController {
 
 	@Autowired
 	ResourceService resourceService;
-	TokenAuthentication tokenauth = new TokenAuthentication();
+	@Autowired
+	TokenAuthentication tokenauth;
 
 	// create new resources by sending post req on /resources with the json data of
 	// resource

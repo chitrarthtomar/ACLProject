@@ -39,9 +39,9 @@ public class MvcController {
 	GroupService groupService;
 	@Autowired
 	ResourceService resourceService;
-	TokenAuthentication tokenauth = new TokenAuthentication();
-	String s = "success";
-	String f = "failed";
+	@Autowired
+	TokenAuthentication tokenauth;
+
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/json")
 	public LoginResponseDto viewuser(@RequestBody LoginDto loginDto) {
@@ -61,11 +61,11 @@ public class MvcController {
 	}
 
 	@RequestMapping(value = "/config", method = RequestMethod.POST, produces = "application/json")
-	public String configure(@RequestParam(value = "token", required = true) String token,
+	public void configure(@RequestParam(value = "token", required = true) String token,
 			@RequestBody ConfigDto config) {
 		if (!tokenauth.checkToken(token) || !tokenauth.checkAdmin(token)) {
 			logger.warn(INFO_1);
-			return null;
+			return ;
 		}
 		String uResource = null;
 		String uArbitraryAttributes = null;
@@ -77,7 +77,7 @@ public class MvcController {
 			userService.updateUser(dummyGuy.getuId(), "test", "test", "dummy",
 					config.getMandatoryAttributes().toString(), uArbitraryAttributes, uResource);
 		logger.info("Admin modified config for mandatory attributes");
-		return s;
+		return ;
 	}
 
 	@RequestMapping(value = "/users", method = RequestMethod.GET, produces = "application/json")
@@ -128,10 +128,21 @@ public class MvcController {
 			ResourceListDto t = new ResourceListDto();
 			t.setrId(r.getrId());
 			t.setrName(r.getrName());
+			t.setrPermission(r.getrPermissions());
 			resourceList.add(t);
 		}
 		logger.info("Returning resourcesList");
 		return resourceList;
 	}
 
+	@RequestMapping(value = "/logout", method = RequestMethod.POST, produces = "application/json")
+	public void deletetoken(@RequestParam(value = "token", required = true) String token) {
+		if (!tokenauth.checkToken(token) || !tokenauth.checkAdmin(token)) {
+			logger.warn(INFO_1);
+			return;
+		}
+		tokenauth.deleteToken(token);
+		logger.info("Admin modified config for mandatory attributes");
+		return ;
+	}
 }

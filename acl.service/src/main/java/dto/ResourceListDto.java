@@ -3,6 +3,15 @@ package dto;
 public class ResourceListDto {
 	private int rId;
 	private String rName;
+	private String rPermission;
+
+	public String getrPermission() {
+		return rPermission;
+	}
+
+	public void setrPermission(String rPermission) {
+		this.rPermission = rPermission;
+	}
 
 	public int getrId() {
 		return rId;

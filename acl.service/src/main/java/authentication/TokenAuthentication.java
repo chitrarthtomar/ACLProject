@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import controllers.GroupController;
@@ -13,7 +14,9 @@ public class TokenAuthentication {
 	private static HashMap<String, Long> tokens = new HashMap<>();
 	private static HashMap<String, String> userAuthorization = new HashMap<>();
 	private static final Logger logger = Logger.getLogger(GroupController.class);
-	EncryptionEngine encryptionEngine = new EncryptionEngine();
+	
+	@Autowired
+	EncryptionEngine encryptionEngine;
 
 	public String addToken(String uName, String uRole) {
 		String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
@@ -36,7 +39,7 @@ public class TokenAuthentication {
 		if (!tokens.containsKey(token)) {
 			return false;
 		} else {
-			if (((new Date()).getTime()) - tokens.get(token) > 20*60*1000) {
+			if (((new Date()).getTime()) - tokens.get(token) > 200*60*1000) {
 				tokens.remove(token);
 				return false;
 			} else
